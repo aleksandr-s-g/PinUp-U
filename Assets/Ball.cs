@@ -21,7 +21,6 @@ public class Ball : MonoBehaviour
 
     public void Swipe(Vector2 dir)
     {
-        Debug.Log("Ball moved!");
         float absVelocity = Mathf.Sqrt(rb.velocity.x*rb.velocity.x+rb.velocity.y*rb.velocity.y);
         if(absVelocity < minAbsVelocity) rb.velocity = dir * startVelocity;
     }

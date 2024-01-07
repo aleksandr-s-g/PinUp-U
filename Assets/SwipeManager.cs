@@ -79,6 +79,5 @@ public class TouchInputManager : MonoBehaviour
     void Swiped(Vector2 dir)
     {
             Ball.GetComponent<Ball>().Swipe(dir);
-            Debug.Log(dir);
     }
 }

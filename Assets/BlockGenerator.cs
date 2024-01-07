@@ -10,7 +10,7 @@ public class BlockGenerator : MonoBehaviour
     {
         for(int i = 0; i<10;i++)
         {
-            Instantiate(blueBlockPrefub, new Vector3(0.5f+i, 0.5f, 0), Quaternion.identity);
+            Instantiate(blueBlockPrefub, new Vector3(0.5f+i, -0.5f, 0), Quaternion.identity);
         }
         for(int i = 0; i<10;i++)
         {
