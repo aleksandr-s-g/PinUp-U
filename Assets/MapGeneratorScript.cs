@@ -60,7 +60,7 @@ public class MapGeneratorScript : MonoBehaviour
             string targetLevelFullFileName = targetLevel.Directory+ "/"+ targetLevel.Name;
             //Debug.Log(targetLevel.Directory+ "/"+ targetLevel.Name);
             string jsonString = File.ReadAllText(targetLevelFullFileName);
-            Debug.Log(jsonString);
+            //Debug.Log(jsonString);
             curLvl = JsonUtility.FromJson<LevelDescripton>(jsonString);
             foreach (BlockDescripton b in curLvl.blocks)
             {
