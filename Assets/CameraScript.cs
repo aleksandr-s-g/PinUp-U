@@ -29,7 +29,7 @@ public class CameraScript : MonoBehaviour
             float cameraSpeed = Mathf.Sign(cameraTransformLen)*cameraTransformLen*cameraTransformLen;
             if (Mathf.Abs(cameraSpeed) < 0.1f) cameraSpeed = 0f;
             float cameraNewPositionY = cameraCurrentPositionY + cameraSpeed*Time.deltaTime;
-            Debug.Log(cameraSpeed);
+            //Debug.Log(cameraSpeed);
             transform.position = new Vector3(cameraStartpositionX,cameraNewPositionY,-1);
             //Debug.Log(ball.transform.position);
         }

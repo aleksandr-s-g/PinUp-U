@@ -1772,6 +1772,7 @@ MonoBehaviour:
   curLvl:
     blocks: []
     coins: []
+  Ball: {fileID: 316659323}
 --- !u!1 &1812151840
 GameObject:
   m_ObjectHideFlags: 0

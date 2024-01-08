@@ -7,8 +7,11 @@ public class MapGeneratorScript : MonoBehaviour
 {
     public GameObject blueBlockPrefub;
     public GameObject redBlockPrefub;
-    public LevelDescripton curLvl;
+    //public LevelDescripton curLvl;
     int currentShift = 0;
+    FileInfo[] levelQueue;
+    //List<FileInfo> levelQueue = new List<FileInfo>();
+    public GameObject Ball;
 
     [System.Serializable]
     public class BlockDescripton
@@ -34,20 +37,45 @@ public class MapGeneratorScript : MonoBehaviour
         //public int out;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void Shuffle(FileInfo[] a)
+    {
+    // Loops through array
+        for (int i = a.Length-1; i > 0; i--)
+        {
+            // Randomize a number between 0 and i (so that the range decreases each time)
+            int rnd = Random.Range(0,i);
+            // Save the value of the current i, otherwise it'll overright when we swap the values
+            FileInfo temp = a[i];
+            // Swap the new and old values
+            a[i] = a[rnd];
+            a[rnd] = temp;
+        }
+    }
+
+    FileInfo popLevel()
+    {
+        FileInfo[] levelQueueNew = new FileInfo[levelQueue.Length-1];
+        //FileInfo[levelQueue.Length-1] levelQueueNew;
+        FileInfo firstElement = levelQueue[0];
+        for(int i = 1;i<levelQueue.Length;i++)
+        {
+            levelQueueNew[i-1] = levelQueue[i];
+        }
+        levelQueue = levelQueueNew;
+        return firstElement;
+    }
+    
+    void fillQueue()
     {
         DirectoryInfo dir = new DirectoryInfo("Assets/Levels/Journey");
-        FileInfo[] filesList = dir.GetFiles("*.json");
-        //FileInfo targetLevel = filesList[0];
-        for(int i = 0; i<10;i++)
-        {
-            GameObject newBlock = Instantiate(blueBlockPrefub, new Vector3(0.5f+i, -0.5f, 0), Quaternion.identity);
-            newBlock.transform.SetParent(transform);
-        }
-        foreach(FileInfo targetLevel in filesList)
-        {
-            for(int i = 0; i<20;i++)
+        levelQueue = dir.GetFiles("*.json");
+        Shuffle(levelQueue);
+    }
+    // Start is called before the first frame update
+    void createLevel(FileInfo targetLevel)
+    {
+        LevelDescripton curLvl;
+        for(int i = 0; i<20;i++)
             {
                 GameObject newBlock = Instantiate(blueBlockPrefub, new Vector3(-0.5f, 0.5f+i+currentShift, 0), Quaternion.identity);
                 newBlock.transform.SetParent(transform);
@@ -76,13 +104,24 @@ public class MapGeneratorScript : MonoBehaviour
                 //Debug.Log(b.colour);
             }
             currentShift+=20;
-        }
-        
+    }
+    void Start()
+    {
+        for(int i = 0; i<10;i++)
+        {
+            GameObject newBlock = Instantiate(blueBlockPrefub, new Vector3(0.5f+i, -0.5f, 0), Quaternion.identity);
+            newBlock.transform.SetParent(transform);
+        } 
+        fillQueue();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Ball.transform.position.y > currentShift-40)
+        {
+            if(levelQueue.Length == 0) fillQueue();
+            createLevel(popLevel());
+        }
     }
 }
