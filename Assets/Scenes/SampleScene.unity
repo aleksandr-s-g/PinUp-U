@@ -1767,6 +1767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blueBlockPrefub: {fileID: 8332120344506233827, guid: 8810d8bc009344b5fa49db08618daffe, type: 3}
+  redBlockPrefub: {fileID: 5854978001925827319, guid: 59ec511d04db944a5a6341a4b9c939b0, type: 3}
   curLvl:
     blocks: []
     coins: []
