@@ -15,13 +15,16 @@ public class Ball : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {   
+
     }
+
 
     public void Swipe(Vector2 dir)
     {
         float absVelocity = Mathf.Sqrt(rb.velocity.x*rb.velocity.x+rb.velocity.y*rb.velocity.y);
         if(absVelocity < minAbsVelocity) rb.velocity = dir * startVelocity;
+        //if (dir.x!=0) rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        //if (dir.y!=0) rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
     }
 }
