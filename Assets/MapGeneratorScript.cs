@@ -7,6 +7,7 @@ public class MapGeneratorScript : MonoBehaviour
 {
     public GameObject blueBlockPrefub;
     public GameObject redBlockPrefub;
+    public GameObject coinPrefub;
     //public LevelDescripton curLvl;
     int currentShift = 0;
     string[] levelQueue;
@@ -117,6 +118,12 @@ public class MapGeneratorScript : MonoBehaviour
                     GameObject newBlock = Instantiate(redBlockPrefub, new Vector3(b.x+0.5f, b.y+0.5f+currentShift, 0), Quaternion.identity);
                     newBlock.transform.SetParent(transform);
                 }
+            }
+            foreach (CoinDescripton c in curLvl.coins)
+            {
+                
+                GameObject newCoin = Instantiate(coinPrefub, new Vector3(c.x+0.5f, c.y+0.5f+currentShift, 0), Quaternion.identity);
+                newCoin.transform.SetParent(transform);
             }
             currentShift+=20;
     }

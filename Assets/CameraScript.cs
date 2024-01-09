@@ -21,19 +21,17 @@ public class CameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ball.transform.position.y > cameraStartpositionY)
-        {
+ 
             float cameraTargetPositionY = ball.transform.position.y;
             float cameraCurrentPositionY = transform.position.y;
             float cameraTransformLen = cameraTargetPositionY - cameraCurrentPositionY;
             float cameraSpeed = Mathf.Sign(cameraTransformLen)*cameraTransformLen*cameraTransformLen;
             if (Mathf.Abs(cameraSpeed) < 0.1f) cameraSpeed = 0f;
             float cameraNewPositionY = cameraCurrentPositionY + cameraSpeed*Time.deltaTime;
-            //Debug.Log(cameraSpeed);
-            transform.position = new Vector3(cameraStartpositionX,cameraNewPositionY,-1);
-            //Debug.Log(ball.transform.position);
-        }
-        
-        //transform.position = new Vector2(0,1000);
+            if (cameraNewPositionY > cameraStartpositionY)
+            {
+                transform.position = new Vector3(cameraStartpositionX,cameraNewPositionY,-1);
+            }
+            
     }
 }

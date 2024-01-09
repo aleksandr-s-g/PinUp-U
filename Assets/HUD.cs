@@ -6,6 +6,7 @@ using TMPro;
 public class HUD : MonoBehaviour
 {
     public TextMeshProUGUI scoresLabel;
+    public TextMeshProUGUI coinsLabel;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +22,9 @@ public class HUD : MonoBehaviour
     public void SetScores (int scores)
     {
         scoresLabel.text = scores.ToString();
+    }
+    public void SetCoins (int coins)
+    {
+        coinsLabel.text = coins.ToString();
     }
 }
