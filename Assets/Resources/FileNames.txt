@@ -1,8 +1,3 @@
-[first]
-bla
-bla
-bla
-
 [journey_levels_list]
 Levels/Journey/cr_01
 Levels/Journey/cr_02
@@ -40,5 +35,22 @@ Levels/Journey/relax08
 Levels/Journey/relax09
 Levels/Journey/relax10
 
-[last]
-bla
+[race_levels_list]
+Race/Journey/race01
+Race/Journey/race02
+Race/Journey/race03
+Race/Journey/race04
+Race/Journey/race05
+Race/Journey/race06
+Race/Journey/race07
+Race/Journey/race08
+Race/Journey/race09
+Race/Journey/race10
+Race/Journey/race11
+Race/Journey/race12
+Race/Journey/race13
+Race/Journey/race14
+Race/Journey/race15
+Race/Journey/race16
+Race/Journey/race17
+
