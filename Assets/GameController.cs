@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 240;
         hud = HUD.GetComponent<HUD>();
         currentScore = 0;
         currentCoins = 0;
