@@ -7,10 +7,13 @@ public class GameController : MonoBehaviour
 {
     public GameObject Ball;
     public GameObject HUD;
+    public GameObject SaveManager;
     int currentScore;
     int currentCoins;
-
+    int loadedScore;
+    SaveManager saveManager;
     HUD hud;
+
     private void OnEnable()
     {
         Ball.GetComponent<Ball>().onCoinCollected+=CoinCollected;
@@ -24,20 +27,26 @@ public class GameController : MonoBehaviour
     {
         Application.targetFrameRate = 240;
         hud = HUD.GetComponent<HUD>();
+        saveManager = SaveManager.GetComponent<SaveManager>();
         currentScore = 0;
-        currentCoins = 0;
+        currentCoins = saveManager.getCoins();;
+        loadedScore = saveManager.getScores();
     }
     public void CoinCollected()
     {
-        Debug.Log("Coin was collected!");
         currentCoins++;
+        saveManager.setCoins(currentCoins);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ((int)Ball.transform.position.y > currentScore)currentScore = (int)Ball.transform.position.y;
-        hud.SetScores(currentScore);
+        if ((int)Ball.transform.position.y > currentScore)
+        {
+            currentScore = (int)Ball.transform.position.y;
+            saveManager.setScores(currentScore + loadedScore);
+        }
+        hud.SetScores(currentScore + loadedScore);
         hud.SetCoins(currentCoins);
     }
 }
