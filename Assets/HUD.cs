@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class HUD : MonoBehaviour
 {
@@ -48,5 +49,10 @@ public class HUD : MonoBehaviour
     public void ShowFPS ()
     {
         fPSLabel.text = ((int)m_lastFramerate).ToString();
+    }
+
+    public void onBackButtonClicked()
+    {
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 }

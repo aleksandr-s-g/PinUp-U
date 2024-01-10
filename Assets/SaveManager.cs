@@ -25,7 +25,6 @@ public class SaveManager : MonoBehaviour
     private void Load()
     {
         string jsonData = File.ReadAllText(Application.persistentDataPath + "/" + filePath);
-        Debug.Log(jsonData);
         gameData = JsonUtility.FromJson<GameData>(jsonData);
     }
 
