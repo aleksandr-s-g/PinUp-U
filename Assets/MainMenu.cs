@@ -10,6 +10,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("GameJourney", LoadSceneMode.Single);
     }
+    public void onJourneyClicked()
+    {
+       
+    }
     // Start is called before the first frame update
     void Start()
     {
