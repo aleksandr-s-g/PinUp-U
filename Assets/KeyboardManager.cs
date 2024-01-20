@@ -17,25 +17,25 @@ public class KeyboardManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             KeyPressed(new Vector2(0, 1));
-            Debug.Log("up");
+           // Debug.Log("up");
         }
             
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             KeyPressed(new Vector2(0, -1));
-            Debug.Log("dn");
+            //Debug.Log("dn");
         }
             
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             KeyPressed(new Vector2(-1, 0));
-            Debug.Log("lf");
+           // Debug.Log("lf");
         }
             
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             KeyPressed(new Vector2(1, 0));
-            Debug.Log("rt");
+           // Debug.Log("rt");
         }
             
     }

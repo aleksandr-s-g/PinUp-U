@@ -21,7 +21,6 @@ public class CameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
- 
             float cameraTargetPositionY = ball.transform.position.y;
             float cameraCurrentPositionY = transform.position.y;
             float cameraTransformLen = cameraTargetPositionY - cameraCurrentPositionY;
