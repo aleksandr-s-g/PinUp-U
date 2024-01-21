@@ -33,6 +33,7 @@ public class MainMenu : MonoBehaviour
             SceneManager.LoadScene("GameRace", LoadSceneMode.Single);
 
         }
+        Debug.Log(gameMode);
 
     }
     // Start is called before the first frame update

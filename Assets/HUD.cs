@@ -54,5 +54,6 @@ public class HUD : MonoBehaviour
     public void onBackButtonClicked()
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        Debug.Log("Menu");
     }
 }

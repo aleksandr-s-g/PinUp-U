@@ -20,7 +20,7 @@ public class SaveManager : MonoBehaviour
     {
         string jsonData = JsonUtility.ToJson(gameData);
         File.WriteAllText(Application.persistentDataPath+"/"+filePath, jsonData);
-        Debug.Log(Application.persistentDataPath);
+       // Debug.Log(Application.persistentDataPath);
     }
 
     private void Load()
