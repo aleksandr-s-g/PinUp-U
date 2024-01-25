@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 240;
-        hud = HUD.GetComponent<HUD>();
+      //  hud = HUD.GetComponent<HUD>();
         saveManager = SaveManager.GetComponent<SaveManager>();
         currentScore = 0;
         currentCoins = saveManager.getCoins();;
@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
             currentScore = (int)Ball.transform.position.y;
             saveManager.setScores(currentScore + loadedScore);
         }
-        hud.SetScores(currentScore + loadedScore);
-        hud.SetCoins(currentCoins);
+        //hud.SetScores(currentScore + loadedScore);
+       // hud.SetCoins(currentCoins);
     }
 }

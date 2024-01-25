@@ -267,8 +267,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013470907}
-        m_TargetAssemblyTypeName: HUD, Assembly-CSharp
+      - m_Target: {fileID: 2013470912}
+        m_TargetAssemblyTypeName: HUDRace, Assembly-CSharp
         m_MethodName: onBackButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -439,7 +439,77 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneWidth: 10
   cameraAscelleration: 0.5
+  cameraMinSpeed: 1
+  cameraMaxSpeed: 10
   ball: {fileID: 622325035}
+--- !u!1 &301681760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 301681763}
+  - component: {fileID: 301681762}
+  - component: {fileID: 301681761}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &301681761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301681760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &301681762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301681760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &301681763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301681760}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &618517735
 GameObject:
   m_ObjectHideFlags: 0
@@ -2820,7 +2890,7 @@ GameObject:
   - component: {fileID: 2013470910}
   - component: {fileID: 2013470909}
   - component: {fileID: 2013470908}
-  - component: {fileID: 2013470907}
+  - component: {fileID: 2013470912}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -2828,22 +2898,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2013470907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2013470906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3812d3c3d14a640bfbff501b1dbede4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoresLabel: {fileID: 1734518747}
-  coinsLabel: {fileID: 1330930774}
-  fPSLabel: {fileID: 1437640062}
-  m_refreshTime: 1
 --- !u!114 &2013470908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2932,6 +2986,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2013470912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013470906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bcd86f0634b0bc488e13f4050863927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2035048313
 GameObject:
   m_ObjectHideFlags: 0
@@ -2985,11 +3051,12 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 2013470911}
   - {fileID: 242174596}
   - {fileID: 1155519506}
   - {fileID: 2035048315}
   - {fileID: 1215956781}
-  - {fileID: 2013470911}
   - {fileID: 1987824803}
   - {fileID: 622325040}
   - {fileID: 1801946051}
+  - {fileID: 301681763}

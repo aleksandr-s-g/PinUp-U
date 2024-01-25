@@ -28,7 +28,7 @@ public class MainMenu : MonoBehaviour
             SceneManager.LoadScene("GameJourney", LoadSceneMode.Single);
 
         }
-        if (gameMode == "Race")
+        if (gameMode == "race")
         {
             SceneManager.LoadScene("GameRace", LoadSceneMode.Single);
 

@@ -18,15 +18,19 @@ public class HUD : MonoBehaviour
     void Start()
     {
         scoresLabel.text = "777";
+        //Debug.Log("hud started");
     }
 
     // Update is called once per frame
     void Update()
+
     {
-        if( m_timeCounter < m_refreshTime )
+       // Debug.Log("hud upd");
+        if ( m_timeCounter < m_refreshTime )
     {
         m_timeCounter += Time.deltaTime;
         m_frameCounter++;
+
     }
     else
     {
@@ -54,6 +58,11 @@ public class HUD : MonoBehaviour
     public void onBackButtonClicked()
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        Debug.Log("Menu");
+    }
+    public void onBackButtonClickedRace()
+    {
+        //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         Debug.Log("Menu");
     }
 }

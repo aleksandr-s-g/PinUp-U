@@ -12,7 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: be41b6ace821d4dbe88718d22d871315
   - enabled: 1
+    path: Assets/Scenes/GameRace.unity
+    guid: 2da7ab54c6a01df42977e1edf19e9a03
+  - enabled: 1
     path: Assets/Scenes/GameJourney.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: a147a21b33a2d4a4285da27dde6e4cce, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: b799d31feef684d96bba2b5296d40b37, type: 2}
