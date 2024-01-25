@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public string gameMode = "journey";
+    public GameObject SaveManager;
+    SaveManager saveManager;
     public void onGameModeJourneyClicked(bool state)
     {
         if (state) 
@@ -26,12 +28,13 @@ public class MainMenu : MonoBehaviour
          if (gameMode == "journey")
         {
             SceneManager.LoadScene("GameJourney", LoadSceneMode.Single);
+            saveManager.setGameMode(gameMode);
 
         }
         if (gameMode == "race")
         {
             SceneManager.LoadScene("GameRace", LoadSceneMode.Single);
-
+            saveManager.setGameMode(gameMode);
         }
         Debug.Log(gameMode);
 
@@ -39,7 +42,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        saveManager = SaveManager.GetComponent<SaveManager>();
     }
 
     // Update is called once per frame
