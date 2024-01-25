@@ -3476,6 +3476,9 @@ MonoBehaviour:
   Ball: {fileID: 622325035}
   HUD: {fileID: 2013470906}
   SaveManager: {fileID: 1801946049}
+  LosePanel: {fileID: 560592989}
+  Camera: {fileID: 242174592}
+  loseDistance: 20
 --- !u!4 &1987824803
 Transform:
   m_ObjectHideFlags: 0

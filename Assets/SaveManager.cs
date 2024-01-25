@@ -11,6 +11,7 @@ public class SaveManager : MonoBehaviour
         public int scores;
         public int coins;
         public string uuid;
+        public string gameMode;
     }
 
     private string filePath = "gameSave.json";
@@ -59,7 +60,17 @@ public class SaveManager : MonoBehaviour
         Load();
         return gameData.coins;
     }
+    public void setGameMode (string gm)
+    {
+        gameData.gameMode = gm;
+        Save();
+    }
 
+    public string getGameMode()
+    {
+        Load();
+        return gameData.gameMode;
+    }
 
 
     // Update is called once per frame
