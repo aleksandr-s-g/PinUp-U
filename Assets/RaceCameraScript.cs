@@ -38,15 +38,14 @@ public class RaceCameraScript : MonoBehaviour
             {
                 cameraSpeed = cameraTransformLen * cameraTransformLen + cameraSpeedAdd;
             }
-
-            cameraSpeedAdd = cameraSpeedAdd + cameraAscelleration * Time.deltaTime;
+            if (cameraSpeedAdd < cameraMaxSpeed) cameraSpeedAdd = cameraSpeedAdd + cameraAscelleration * Time.deltaTime;
             if (Mathf.Abs(cameraSpeed) < 0.1f) cameraSpeed = 0f;
             float cameraNewPositionY = cameraCurrentPositionY + cameraSpeed * Time.deltaTime;
             if (cameraNewPositionY > cameraCurrentPositionY)
             {
                 transform.position = new Vector3(cameraStartpositionX, cameraNewPositionY, -1);
             }
-            //Debug.Log(cameraSpeedAdd);
+           // Debug.Log(cameraSpeedAdd);
         }
         if (ball.transform.position.y > 1) isGameStarted = true;
     }

@@ -58,11 +58,8 @@ public class HUD : MonoBehaviour
     public void onBackButtonClicked()
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-        Debug.Log("Menu");
+        
     }
-    public void onBackButtonClickedRace()
-    {
-        //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-        Debug.Log("Menu");
-    }
+    
+    
 }
