@@ -8,11 +8,15 @@ public class GameController : MonoBehaviour
     public GameObject Ball;
     public GameObject HUD;
     public GameObject SaveManager;
+    public GameObject LosePanel;
+    public GameObject Camera;
+    public float loseDistance = 30f;
     int currentScore;
     int currentCoins;
     int loadedScore;
     SaveManager saveManager;
     HUD hud;
+   
 
     private void OnEnable()
     {
@@ -27,6 +31,7 @@ public class GameController : MonoBehaviour
     {
         Application.targetFrameRate = 240;
       //  hud = HUD.GetComponent<HUD>();
+        LosePanel.SetActive(false);
         saveManager = SaveManager.GetComponent<SaveManager>();
         currentScore = 0;
         currentCoins = saveManager.getCoins();;
@@ -45,6 +50,10 @@ public class GameController : MonoBehaviour
         {
             currentScore = (int)Ball.transform.position.y;
             saveManager.setScores(currentScore + loadedScore);
+        }
+        if (Ball.transform.position.y < Camera.transform.position.y-loseDistance)
+        {
+            LosePanel.SetActive(true);
         }
         //hud.SetScores(currentScore + loadedScore);
        // hud.SetCoins(currentCoins);
