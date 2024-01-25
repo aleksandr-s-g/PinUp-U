@@ -1370,6 +1370,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameMode: journey
   SaveManager: {fileID: 301836384}
+  toggleRace: {fileID: 1824049040}
+  toggleJourney: {fileID: 2129062504}
+  toggleGroup: {fileID: 844183835}
 --- !u!1 &1677064724
 GameObject:
   m_ObjectHideFlags: 0

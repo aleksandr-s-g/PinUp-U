@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     public string gameMode = "journey";
     public GameObject SaveManager;
     SaveManager saveManager;
+    public Toggle toggleRace;
+    public Toggle toggleJourney;
+    public ToggleGroup toggleGroup;
+
     public void onGameModeJourneyClicked(bool state)
     {
         if (state) 
@@ -36,14 +41,24 @@ public class MainMenu : MonoBehaviour
             SceneManager.LoadScene("GameRace", LoadSceneMode.Single);
             saveManager.setGameMode(gameMode);
         }
-        Debug.Log(gameMode);
+        //Debug.Log(gameMode);
 
     }
     // Start is called before the first frame update
     void Start()
     {
+        toggleRace.group = toggleGroup;
+        toggleJourney.group = toggleGroup;
         saveManager = SaveManager.GetComponent<SaveManager>();
         gameMode = saveManager.getGameMode();
+        if (gameMode == "race")
+        {
+            toggleRace.isOn = true;
+        }
+        if (gameMode == "journey")
+        {
+            toggleJourney.isOn = true;
+        }
     }
 
     // Update is called once per frame
