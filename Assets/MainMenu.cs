@@ -43,6 +43,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         saveManager = SaveManager.GetComponent<SaveManager>();
+        gameMode = saveManager.getGameMode();
     }
 
     // Update is called once per frame
