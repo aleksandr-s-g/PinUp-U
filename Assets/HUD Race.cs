@@ -49,7 +49,7 @@ public class HUDRace : MonoBehaviour
     }
     public void SetBestRace(int bestrace)
     {
-        bestraceLabel.text = bestrace.ToString();
+        bestraceLabel.text = "Best: " + bestrace.ToString();
     }
     public void SetCoins(int coins)
     {
