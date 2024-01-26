@@ -91,7 +91,7 @@ public class MapGeneratorScript : MonoBehaviour
             }
         }
         string[] level_list = new string[target_level_list_range[1]-target_level_list_range[0]+1];
-        Debug.Log(level_list.Length);
+        //Debug.Log(level_list.Length);
        // Debug.Log(level_list[0]);
         for (int i = 0; i<level_list.Length;i++)
         {
@@ -114,7 +114,7 @@ public class MapGeneratorScript : MonoBehaviour
                 GameObject newBlock = Instantiate(blueBlockPrefub, new Vector3(10.5f, 0.5f+i+currentShift, 0), Quaternion.identity);
                 newBlock.transform.SetParent(transform);
             }
-        Debug.Log(targetLevel);
+       // Debug.Log(targetLevel);
             string jsonString = Resources.Load<TextAsset>(targetLevel).text;
             curLvl = JsonUtility.FromJson<LevelDescripton>(jsonString);
             foreach (BlockDescripton b in curLvl.blocks)

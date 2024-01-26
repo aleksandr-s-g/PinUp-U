@@ -30,7 +30,7 @@ public class MainMenu : MonoBehaviour
     }
     public void onStartClicked()
     {
-         if (gameMode == "journey")
+        if (gameMode == "journey")
         {
             SceneManager.LoadScene("GameJourney", LoadSceneMode.Single);
             saveManager.setGameMode(gameMode);
@@ -42,7 +42,10 @@ public class MainMenu : MonoBehaviour
             saveManager.setGameMode(gameMode);
         }
         //Debug.Log(gameMode);
-
+        if (gameMode != "journey" && gameMode == "race")
+        {
+            gameMode = "journey";
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -51,6 +54,11 @@ public class MainMenu : MonoBehaviour
         toggleJourney.group = toggleGroup;
         saveManager = SaveManager.GetComponent<SaveManager>();
         gameMode = saveManager.getGameMode();
+        if (gameMode != "journey" && gameMode != "race")
+        {
+            gameMode = "journey";
+            saveManager.setGameMode(gameMode);
+        }
         if (gameMode == "race")
         {
             toggleRace.isOn = true;
