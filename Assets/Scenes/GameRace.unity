@@ -3615,6 +3615,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bcd86f0634b0bc488e13f4050863927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoresLabel: {fileID: 1734518747}
+  coinsLabel: {fileID: 1330930774}
+  fPSLabel: {fileID: 1437640062}
+  m_refreshTime: 0.5
 --- !u!1 &2035048313
 GameObject:
   m_ObjectHideFlags: 0

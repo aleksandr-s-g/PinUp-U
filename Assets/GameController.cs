@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
     public float loseDistance = 30f;
     int currentScore;
     int currentCoins;
-    int loadedScore;
+    
     SaveManager saveManager;
     HUD hud;
    
@@ -30,12 +30,12 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 240;
-      //  hud = HUD.GetComponent<HUD>();
+        hud = HUD.GetComponent<HUD>();
         LosePanel.SetActive(false);
         saveManager = SaveManager.GetComponent<SaveManager>();
         currentScore = 0;
-        currentCoins = saveManager.getCoins();;
-        loadedScore = saveManager.getScores();
+        currentCoins = saveManager.getCoins();
+        
     }
     public void CoinCollected()
     {
@@ -48,14 +48,15 @@ public class GameController : MonoBehaviour
     {
         if ((int)Ball.transform.position.y > currentScore)
         {
-            currentScore = (int)Ball.transform.position.y;
-            saveManager.setScores(currentScore + loadedScore);
+            currentScore = (int)Ball.transform.position.y;            
         }
         if (Ball.transform.position.y < Camera.transform.position.y-loseDistance)
         {
             LosePanel.SetActive(true);
         }
-        //hud.SetScores(currentScore + loadedScore);
-       // hud.SetCoins(currentCoins);
+        // hud.SetScores(currentScore);
+        // hud.SetCoins(currentCoins);
+       // Debug.Log(currentScore);
+       // Debug.Log(currentCoins);
     }
 }
