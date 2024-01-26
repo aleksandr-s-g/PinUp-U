@@ -9,6 +9,7 @@ public class SaveManager : MonoBehaviour
     private class GameData
     {
         public int scores;
+        public int bestrace;
         public int coins;
         public string uuid;
         public string gameMode;
@@ -48,7 +49,17 @@ public class SaveManager : MonoBehaviour
         Load();
         return gameData.scores;
     }
+    public void setBestRace(int br)
+    {
+        gameData.bestrace = br;
+        Save();
+    }
 
+    public int getBestRace()
+    {
+        Load();
+        return gameData.bestrace;
+    }
     public void setCoins(int c)
     {
         gameData.coins = c;

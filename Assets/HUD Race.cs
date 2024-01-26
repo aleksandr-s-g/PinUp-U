@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class HUDRace : MonoBehaviour
 {
     public TextMeshProUGUI scoresLabel;
+    public TextMeshProUGUI bestraceLabel;
     public TextMeshProUGUI coinsLabel;
     public TextMeshProUGUI fPSLabel;
     // Start is called before the first frame update
@@ -45,6 +46,10 @@ public class HUDRace : MonoBehaviour
     public void SetScores(int scores)
     {
         scoresLabel.text = scores.ToString();
+    }
+    public void SetBestRace(int bestrace)
+    {
+        bestraceLabel.text = bestrace.ToString();
     }
     public void SetCoins(int coins)
     {
