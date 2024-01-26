@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class HUD : MonoBehaviour
+public class HUDJourney : MonoBehaviour
 {
     public TextMeshProUGUI scoresLabel;
     public TextMeshProUGUI coinsLabel;

@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameController : MonoBehaviour
+public class GameControllerRace : MonoBehaviour
 {
     public GameObject Ball;
-    public GameObject HUD;
+    public GameObject HUDRace;
     public GameObject SaveManager;
     public GameObject LosePanel;
     public GameObject Camera;
     public float loseDistance = 30f;
     int currentScore;
-    int currentCoins;
-    
+    int currentCoins;    
     SaveManager saveManager;
-    HUD hud;
-   
+    HUDRace hudrace;
 
     private void OnEnable()
     {
@@ -30,7 +28,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 240;
-        hud = HUD.GetComponent<HUD>();
+        hudrace = HUDRace.GetComponent<HUDRace>();
         LosePanel.SetActive(false);
         saveManager = SaveManager.GetComponent<SaveManager>();
         currentScore = 0;
@@ -54,8 +52,8 @@ public class GameController : MonoBehaviour
         {
             LosePanel.SetActive(true);
         }
-        // hud.SetScores(currentScore);
-        // hud.SetCoins(currentCoins);
+         hudrace.SetScores(currentScore);
+         hudrace.SetCoins(currentCoins);
        // Debug.Log(currentScore);
        // Debug.Log(currentCoins);
     }

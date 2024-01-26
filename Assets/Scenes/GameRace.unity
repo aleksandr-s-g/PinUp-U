@@ -3474,7 +3474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ball: {fileID: 622325035}
-  HUD: {fileID: 2013470906}
+  HUDRace: {fileID: 2013470906}
   SaveManager: {fileID: 1801946049}
   LosePanel: {fileID: 560592989}
   Camera: {fileID: 242174592}
@@ -3508,7 +3508,7 @@ GameObject:
   - component: {fileID: 2013470908}
   - component: {fileID: 2013470912}
   m_Layer: 5
-  m_Name: HUD
+  m_Name: HUDRace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

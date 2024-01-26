@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameControllerJourney : MonoBehaviour
 {
     public GameObject Ball;
-    public GameObject HUD;
+    public GameObject HUDJourney;
     public GameObject SaveManager;
     
     
@@ -13,7 +13,7 @@ public class GameControllerJourney : MonoBehaviour
     int currentCoins;
     int loadedScore;
     SaveManager saveManager;
-    HUD hud;
+    HUDJourney hudjourney;
 
 
     private void OnEnable()
@@ -28,7 +28,7 @@ public class GameControllerJourney : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 240;
-        hud = HUD.GetComponent<HUD>();
+        hudjourney = HUDJourney.GetComponent<HUDJourney>();
         
         saveManager = SaveManager.GetComponent<SaveManager>();
         currentScore = 0;
@@ -49,7 +49,7 @@ public class GameControllerJourney : MonoBehaviour
             currentScore = (int)Ball.transform.position.y;
             saveManager.setScores(currentScore + loadedScore);
         }
-        hud.SetScores(currentScore + loadedScore);
-        hud.SetCoins(currentCoins);
+        hudjourney.SetScores(currentScore + loadedScore);
+        hudjourney.SetCoins(currentCoins);
     }
 }
