@@ -9,7 +9,11 @@ public class TouchInputManager : MonoBehaviour
     string message;
     Vector2 direction;
     public GameObject Ball;
-
+    public float maxTimeBetweenTaps = 0.5f;
+    public float maxDistanceBetweenTaps = 5f;
+    private int tapCount = 0;
+    private float lastTapTime = 0f;
+    private Vector2 lastTapPosition;
     void Start(){
         direction = new Vector2(0,0);
     }
@@ -73,6 +77,28 @@ public class TouchInputManager : MonoBehaviour
                     break;
             }
             //Debug.Log(message);
+        }
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                if (Time.time - lastTapTime < maxTimeBetweenTaps &&
+                    Vector2.Distance(touch.position, lastTapPosition) < maxDistanceBetweenTaps)
+                {
+                    // Double tap detected
+                    Debug.Log("Double tap detected!");
+                    tapCount = 0; // Reset tap count
+                }
+                else
+                {
+                    // Single tap detected
+                    tapCount++;
+                    lastTapTime = Time.time;
+                    lastTapPosition = touch.position;
+                }
+            }
         }
     }
 
