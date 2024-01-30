@@ -5,6 +5,7 @@ using UnityEngine;
 public class KeyboardManager : MonoBehaviour
 {
     public GameObject Ball;
+    public GameObject GameController;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +38,11 @@ public class KeyboardManager : MonoBehaviour
             KeyPressed(new Vector2(1, 0));
            // Debug.Log("rt");
         }
-            
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameController.GetComponent<GameControllerRace>().DoubleTap();
+        }
+
     }
     void KeyPressed(Vector2 dir)
     {

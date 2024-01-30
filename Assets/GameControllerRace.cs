@@ -66,4 +66,9 @@ public class GameControllerRace : MonoBehaviour
        // Debug.Log(currentScore);
        // Debug.Log(currentCoins);
     }
+    public void DoubleTap()
+    {
+        Debug.Log("Double tap detected!");
+    }
+
 }

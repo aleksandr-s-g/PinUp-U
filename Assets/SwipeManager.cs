@@ -6,7 +6,7 @@ public class TouchInputManager : MonoBehaviour
     public Vector2 vector;
     public float min_swipe_len = 30f;
     public float max_diagonal_factor = 0.3f;
-    string message;
+    //string message;
     Vector2 direction;
     public GameObject Ball;
     public float maxTimeBetweenTaps = 0.5f;
@@ -14,6 +14,7 @@ public class TouchInputManager : MonoBehaviour
     private int tapCount = 0;
     private float lastTapTime = 0f;
     private Vector2 lastTapPosition;
+    public GameObject GameController;
     void Start(){
         direction = new Vector2(0,0);
     }
@@ -29,7 +30,7 @@ public class TouchInputManager : MonoBehaviour
                 case TouchPhase.Began:
                     // Record initial touch position.
                     startPos = touch.position;
-                    message = "Begun ";
+                    //message = "Begun ";
                     break;
 
                 //Determine if the touch is a moving touch
@@ -66,14 +67,14 @@ public class TouchInputManager : MonoBehaviour
                         
                         startPos = touch.position;
                     }
-                    message = "Moving ";
+                   // message = "Moving ";
                     //if (direction.x*direction.x+direction.)
                     //Debug.Log(Mathf.Sqrt(direction.x*direction.x+direction.y*direction.y));
                     break;
 
                 case TouchPhase.Ended:
                     // Report that the touch has ended when it ends
-                    message = "Ending ";
+                   // message = "Ending ";
                     break;
             }
             //Debug.Log(message);
@@ -88,8 +89,9 @@ public class TouchInputManager : MonoBehaviour
                     Vector2.Distance(touch.position, lastTapPosition) < maxDistanceBetweenTaps)
                 {
                     // Double tap detected
-                    Debug.Log("Double tap detected!");
+                    // Debug.Log("Double tap detected!");
                     tapCount = 0; // Reset tap count
+                    DoubleTapped();
                 }
                 else
                 {
@@ -105,5 +107,9 @@ public class TouchInputManager : MonoBehaviour
     void Swiped(Vector2 dir)
     {
             Ball.GetComponent<Ball>().Swipe(dir);
+    }
+    void DoubleTapped()
+    {
+            GameController.GetComponent<GameControllerRace>().DoubleTap();
     }
 }
