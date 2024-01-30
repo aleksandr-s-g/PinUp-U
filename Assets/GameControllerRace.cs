@@ -11,6 +11,8 @@ public class GameControllerRace : MonoBehaviour
     public GameObject LosePanel;
     public GameObject Camera;
     public float loseDistance = 30f;
+    public int resetDistance = 3;
+    int resetTargetY = 0;
     int currentScore;
     int currentBest;
     int currentCoins;    
@@ -69,6 +71,12 @@ public class GameControllerRace : MonoBehaviour
     public void DoubleTap()
     {
         Debug.Log("Double tap detected!");
+        if(currentCoins >= 5) 
+        { 
+            currentCoins = currentCoins - 5;
+            resetTargetY = (Mathf.FloorToInt(Camera.transform.position.y / 20) + resetDistance) * 20;
+            Ball.GetComponent<Ball>().ResetBall(resetTargetY);
+        }
     }
 
 }

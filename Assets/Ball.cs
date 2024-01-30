@@ -43,5 +43,9 @@ public class Ball : MonoBehaviour
         //if (dir.x!=0) rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         //if (dir.y!=0) rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
     }
-   
+    public void ResetBall(int targetYPosition)
+    {
+        rb.position = new Vector3(3f, targetYPosition, 0f);
+    }
+
 }
