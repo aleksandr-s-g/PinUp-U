@@ -15,7 +15,8 @@ public class GameControllerRace : MonoBehaviour
     int resetTargetY = 0;
     int currentScore;
     int currentBest;
-    int currentCoins;    
+    int currentCoins;
+    bool isLoosing = false;
     SaveManager saveManager;
     HUDRace hudrace;
     
@@ -38,6 +39,7 @@ public class GameControllerRace : MonoBehaviour
         currentCoins = saveManager.getCoins();
         currentBest = saveManager.getBestRace();
         hudrace.SetBestRace(currentBest);
+        isLoosing = false;
     }
     public void CoinCollected()
     {
@@ -55,6 +57,7 @@ public class GameControllerRace : MonoBehaviour
         if (Ball.transform.position.y < Camera.transform.position.y-loseDistance)
         {
             LosePanel.SetActive(true);
+            isLoosing = true;
         }
         if (currentScore > currentBest)
         {
@@ -64,7 +67,14 @@ public class GameControllerRace : MonoBehaviour
         }
          hudrace.SetScores(currentScore);
          hudrace.SetCoins(currentCoins);
-
+        if (isLoosing) 
+        {
+            if (Ball.transform.position.y > Camera.transform.position.y - (loseDistance/2))
+            {
+                LosePanel.SetActive(false);
+                isLoosing = false;
+            }
+        }
        // Debug.Log(currentScore);
        // Debug.Log(currentCoins);
     }
