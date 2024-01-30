@@ -8,7 +8,8 @@ public class GameControllerRace : MonoBehaviour
     public GameObject Ball;
     public GameObject HUDRace;
     public GameObject SaveManager;
-    public GameObject LosePanel;
+    public GameObject LosePanel1;
+    public GameObject LosePanel2;
     public GameObject Camera;
     public float loseDistance = 30f;
     public int resetDistance = 3;
@@ -33,7 +34,8 @@ public class GameControllerRace : MonoBehaviour
     {
         Application.targetFrameRate = 240;
         hudrace = HUDRace.GetComponent<HUDRace>();
-        LosePanel.SetActive(false);
+        LosePanel1.SetActive(false);
+        LosePanel2.SetActive(false);
         saveManager = SaveManager.GetComponent<SaveManager>();
         currentScore = 0;
         currentCoins = saveManager.getCoins();
@@ -56,7 +58,7 @@ public class GameControllerRace : MonoBehaviour
         }
         if (Ball.transform.position.y < Camera.transform.position.y-loseDistance)
         {
-            LosePanel.SetActive(true);
+            LosePanel1.SetActive(true);
             isLoosing = true;
         }
         if (currentScore > currentBest)
@@ -71,7 +73,7 @@ public class GameControllerRace : MonoBehaviour
         {
             if (Ball.transform.position.y > Camera.transform.position.y - (loseDistance/2))
             {
-                LosePanel.SetActive(false);
+                LosePanel1.SetActive(false);
                 isLoosing = false;
             }
         }

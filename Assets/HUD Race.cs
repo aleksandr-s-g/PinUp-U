@@ -69,4 +69,8 @@ public class HUDRace : MonoBehaviour
     {
         SceneManager.LoadScene("GameRace", LoadSceneMode.Single);
     }
+    public void onReslifeClickedRace()
+    {
+        Debug.Log("relife clicked");
+    }
 }

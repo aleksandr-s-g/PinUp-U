@@ -5,7 +5,7 @@ using UnityEngine;
 public class RaceCameraScript : MonoBehaviour
 {
     public float sceneWidth = 10;
-    public float cameraAscelleration = 0.05f;
+    public float cameraAscelleration = 0.01f;
     public float cameraMinSpeed = 1f;
     public float cameraMaxSpeed = 10f;
     public GameObject ball;
