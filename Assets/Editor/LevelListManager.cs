@@ -29,7 +29,7 @@ class PreBuildFileNamesSaver : IPreprocessBuildWithReport
         for (int i = 0 ; i<fileList.Length;i++)
         {
             FileInfo targetLevel = fileList[i];
-            File.AppendAllText("Assets/Resources/FileNames.txt", "Race/Journey"+ "/"+ targetLevel.Name.Split(".")[0]+"\n");
+            File.AppendAllText("Assets/Resources/FileNames.txt", "Levels/Race"+ "/"+ targetLevel.Name.Split(".")[0]+"\n");
         }
         File.AppendAllText("Assets/Resources/FileNames.txt", "\n");
 

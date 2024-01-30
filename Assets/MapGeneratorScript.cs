@@ -81,7 +81,7 @@ public class MapGeneratorScript : MonoBehaviour
         target_level_list_range[1] = -1; //to
         for (int i = 0 ; i<line_list.Length;i++)
         {
-            if (line_list[i].IndexOf("[journey_levels_list]", 0) == 0)
+            if (line_list[i].IndexOf("[race_levels_list]", 0) == 0)
             {
                 target_level_list_range[0] = i+1;
             }
@@ -91,8 +91,8 @@ public class MapGeneratorScript : MonoBehaviour
             }
         }
         string[] level_list = new string[target_level_list_range[1]-target_level_list_range[0]+1];
-        //Debug.Log(level_list.Length);
-       // Debug.Log(level_list[0]);
+        Debug.Log(level_list.Length);
+        Debug.Log(level_list[1]);
         for (int i = 0; i<level_list.Length;i++)
         {
             level_list[i] = line_list[i+target_level_list_range[0]];

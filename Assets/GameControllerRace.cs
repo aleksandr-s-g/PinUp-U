@@ -16,7 +16,7 @@ public class GameControllerRace : MonoBehaviour
     int currentCoins;    
     SaveManager saveManager;
     HUDRace hudrace;
-
+    
     private void OnEnable()
     {
         Ball.GetComponent<Ball>().onCoinCollected+=CoinCollected;

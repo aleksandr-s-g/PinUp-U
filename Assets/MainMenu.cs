@@ -42,10 +42,7 @@ public class MainMenu : MonoBehaviour
             saveManager.setGameMode(gameMode);
         }
         //Debug.Log(gameMode);
-        if (gameMode != "journey" && gameMode == "race")
-        {
-            gameMode = "journey";
-        }
+       
     }
     // Start is called before the first frame update
     void Start()
