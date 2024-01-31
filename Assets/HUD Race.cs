@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class HUDRace : MonoBehaviour
@@ -14,9 +15,11 @@ public class HUDRace : MonoBehaviour
     public TextMeshProUGUI looseScoreLabel;
     public TextMeshProUGUI countDownLabel;
     public GameObject Spinner;
+    public GameObject GameController;
+    public Button button;
     public float rotationSpeed = 90f;
     // Start is called before the first frame update
-
+    
     int m_frameCounter = 0;
     float m_timeCounter = 0.0f;
     float m_lastFramerate = 0.0f;
@@ -24,6 +27,7 @@ public class HUDRace : MonoBehaviour
     void Start()
     {
         scoresLabel.text = "888";
+        button = GetComponent<Button>();
         //Debug.Log("hud started");
     }
 
@@ -93,6 +97,12 @@ public class HUDRace : MonoBehaviour
     }
     public void onReslifeClickedRace()
     {
-        Debug.Log("relife clicked");
+
+        GameController.GetComponent<GameControllerRace>().DoubleTap(); 
+        //Debug.Log("relife clicked");
+    }
+    public void SetButtonInteractable(bool interactable)
+    {
+        button.interactable = interactable;
     }
 }

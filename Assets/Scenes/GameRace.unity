@@ -1003,7 +1003,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &560592990
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3391,7 +3391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1555582097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5220,6 +5220,8 @@ MonoBehaviour:
   looseScoreLabel: {fileID: 1802874525}
   countDownLabel: {fileID: 1670432860}
   Spinner: {fileID: 1668289708}
+  GameController: {fileID: 1987824801}
+  button: {fileID: 1025923573}
   rotationSpeed: 90
   m_refreshTime: 0.5
 --- !u!1 &2035048313
