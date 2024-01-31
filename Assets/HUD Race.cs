@@ -66,7 +66,7 @@ public class HUDRace : MonoBehaviour
     }
     public void SetTimer(float timer)
     {
-        youWillLoseInLabel.text = "You will lose in " + timer.ToString("F2");
+        youWillLoseInLabel.text = timer.ToString("F2");
         countDownLabel.text = timer.ToString("F2") + "s";
     }
     public void SetLooseScore(int scores)

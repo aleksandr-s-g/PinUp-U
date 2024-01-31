@@ -83,6 +83,7 @@ public class GameControllerRace : MonoBehaviour
             if(!isTimerExpired1 || !isTimerExpired2)
             {
                 looseTimer = looseTimer - Time.deltaTime;
+                hudrace.SetTimer(looseTimer);
             }
             if (Ball.transform.position.y > Camera.transform.position.y - (loseDistance/2))
             {
