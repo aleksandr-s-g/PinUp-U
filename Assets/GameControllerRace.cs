@@ -59,11 +59,7 @@ public class GameControllerRace : MonoBehaviour
         {
             currentScore = (int)Ball.transform.position.y;            
         }
-        if (Ball.transform.position.y < Camera.transform.position.y-loseDistance)
-        {
-            LosePanel1.SetActive(true);
-            isLoosing = true;
-        }
+        
         if (currentScore > currentBest)
         {
             currentBest = currentScore;
@@ -72,9 +68,22 @@ public class GameControllerRace : MonoBehaviour
         }
          hudrace.SetScores(currentScore);
          hudrace.SetCoins(currentCoins);
+        if (!isLoosing) 
+        {
+            if (Ball.transform.position.y < Camera.transform.position.y - loseDistance)
+            {
+                LosePanel1.SetActive(true);
+                isLoosing = true;
+                hudrace.SetTimer(looseTimer);
+            }
+        }
+        
         if (isLoosing) 
         {
-            
+            if(!isTimerExpired1 || !isTimerExpired2)
+            {
+                looseTimer = looseTimer - Time.deltaTime;
+            }
             if (Ball.transform.position.y > Camera.transform.position.y - (loseDistance/2))
             {
                 LosePanel1.SetActive(false);
