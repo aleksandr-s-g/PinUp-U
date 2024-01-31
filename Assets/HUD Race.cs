@@ -10,6 +10,11 @@ public class HUDRace : MonoBehaviour
     public TextMeshProUGUI bestraceLabel;
     public TextMeshProUGUI coinsLabel;
     public TextMeshProUGUI fPSLabel;
+    public TextMeshProUGUI youWillLoseInLabel;
+    public TextMeshProUGUI looseScoreLabel;
+    public TextMeshProUGUI countDownLabel;
+    public GameObject Spinner;
+    public float rotationSpeed = 90f;
     // Start is called before the first frame update
 
     int m_frameCounter = 0;
@@ -41,6 +46,14 @@ public class HUDRace : MonoBehaviour
             m_timeCounter = 0.0f;
         }
         ShowFPS();
+        float currentRotation = Spinner.transform.rotation.eulerAngles.z;
+
+        
+        float newRotation = currentRotation + rotationSpeed * Time.deltaTime;
+
+        
+        Spinner.transform.rotation = Quaternion.Euler(0f, 0f, newRotation);
+
     }
 
     public void SetScores(int scores)
@@ -50,6 +63,15 @@ public class HUDRace : MonoBehaviour
     public void SetBestRace(int bestrace)
     {
         bestraceLabel.text = "Best: " + bestrace.ToString();
+    }
+    public void SetTimer(float timer)
+    {
+        youWillLoseInLabel.text = "You will lose in " + timer.ToString("F2");
+        countDownLabel.text = timer.ToString("F2") + "s";
+    }
+    public void SetLooseScore(int scores)
+    {
+        looseScoreLabel.text =  "Score: " + scores.ToString();
     }
     public void SetCoins(int coins)
     {

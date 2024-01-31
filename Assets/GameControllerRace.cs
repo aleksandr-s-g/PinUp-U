@@ -18,6 +18,9 @@ public class GameControllerRace : MonoBehaviour
     int currentBest;
     int currentCoins;
     bool isLoosing = false;
+    bool isTimerExpired1 = false;
+    bool isTimerExpired2 = false;
+    public float looseTimer = 5f;
     SaveManager saveManager;
     HUDRace hudrace;
     
@@ -71,10 +74,14 @@ public class GameControllerRace : MonoBehaviour
          hudrace.SetCoins(currentCoins);
         if (isLoosing) 
         {
+            
             if (Ball.transform.position.y > Camera.transform.position.y - (loseDistance/2))
             {
                 LosePanel1.SetActive(false);
                 isLoosing = false;
+                looseTimer = 5f;
+                isTimerExpired1 = false;
+                isTimerExpired1 = false;
             }
         }
        // Debug.Log(currentScore);
