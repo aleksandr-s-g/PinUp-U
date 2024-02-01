@@ -5071,7 +5071,7 @@ MonoBehaviour:
   LosePanel1: {fileID: 560592989}
   LosePanel2: {fileID: 1555582096}
   Camera: {fileID: 242174592}
-  loseDistance: 20
+  loseDistance: 10
   resetDistance: 3
   looseTimer: 5
 --- !u!4 &1987824803

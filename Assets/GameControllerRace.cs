@@ -47,7 +47,7 @@ public class GameControllerRace : MonoBehaviour
         currentCoins = saveManager.getCoins();
         currentBest = saveManager.getBestRace();
         hudrace.SetBestRace(currentBest);
-        //hudrace.SetButtonInteractable(true);
+        hudrace.SetButtonInteractable(true);
         isLoosing = false;
     }
     public void CoinCollected()
@@ -96,17 +96,17 @@ public class GameControllerRace : MonoBehaviour
                         looseTimer = 5f;
                         LosePanel1.SetActive(false);
                         LosePanel2.SetActive(true);
-                       // if (currentCoins <= 10) hudrace.SetButtonInteractable(false);
+                        if (currentCoins <= 10) hudrace.SetButtonInteractable(false);
                     }
                     else
                     {
                         isTimerExpired2 = true;
                         looseTimer = 0f;
-                       // hudrace.SetButtonInteractable(false);
+                        hudrace.SetButtonInteractable(false);
                     }
                 }
             }
-            if (Ball.transform.position.y > Camera.transform.position.y - (loseDistance/2))
+            if (Ball.transform.position.y > Camera.transform.position.y - (loseDistance))
             {
                 LosePanel1.SetActive(false);
                 LosePanel2.SetActive(false);
@@ -114,7 +114,7 @@ public class GameControllerRace : MonoBehaviour
                 looseTimer = 5f;
                 isTimerExpired1 = false;
                 isTimerExpired2 = false;
-               // hudrace.SetButtonInteractable(true);
+                hudrace.SetButtonInteractable(true);
             }
         }
        // Debug.Log(currentScore);

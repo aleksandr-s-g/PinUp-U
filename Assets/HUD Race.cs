@@ -27,7 +27,7 @@ public class HUDRace : MonoBehaviour
     void Start()
     {
         scoresLabel.text = "888";
-        button = GetComponent<Button>();
+        //button = GetComponent<Button>();
         //Debug.Log("hud started");
     }
 
@@ -104,5 +104,6 @@ public class HUDRace : MonoBehaviour
     public void SetButtonInteractable(bool interactable)
     {
         button.interactable = interactable;
+        Debug.Log("Set interacteble: " + interactable.ToString());
     }
 }
