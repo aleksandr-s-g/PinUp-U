@@ -914,9 +914,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneWidth: 10
-  cameraAscelleration: 0.1
+  cameraAscelleration: 0.05
   cameraMinSpeed: 0.5
-  cameraMaxSpeed: 8
+  cameraMaxSpeed: 9
   ball: {fileID: 622325035}
 --- !u!1 &301681760
 GameObject:

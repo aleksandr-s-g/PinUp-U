@@ -9,10 +9,13 @@ public class RaceCameraScript : MonoBehaviour
     public float cameraMinSpeed = 1f;
     public float cameraMaxSpeed = 10f;
     public GameObject ball;
+    //public GameObject GameControllerRace;
+   // GameControllerRace gameControllerRace;
     float cameraStartpositionY;
     float cameraStartpositionX;
     float cameraSpeedAdd;
     bool isGameStarted = false;
+    private int currentScore = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,22 +26,30 @@ public class RaceCameraScript : MonoBehaviour
         Camera.main.orthographicSize = orthoSize;
         transform.position = new Vector3(cameraStartpositionX, cameraStartpositionY, -1);
         cameraSpeedAdd = cameraMinSpeed;
+     //   gameControllerRace = gameControllerRace.GetComponent<GameControllerRace>();
     }
 
     // Update is called once per frame
     void Update()
     {
+      //  currentScore = gameControllerRace.getCurretnScore();
+       // Debug.Log(currentScore);
+        if ((int)ball.transform.position.y > currentScore)
+        {
+            currentScore = (int)ball.transform.position.y;
+        }
         if (isGameStarted)
         {
             float cameraTargetPositionY = ball.transform.position.y;
             float cameraCurrentPositionY = transform.position.y;
             float cameraTransformLen = cameraTargetPositionY - cameraCurrentPositionY;
             float cameraSpeed = cameraSpeedAdd;
+
             if (cameraTransformLen > 0)
             {
                 cameraSpeed = cameraTransformLen * cameraTransformLen + cameraSpeedAdd;
             }
-            if (cameraSpeedAdd < cameraMaxSpeed) cameraSpeedAdd = cameraSpeedAdd + cameraAscelleration * Time.deltaTime;
+            if (cameraSpeedAdd < cameraMaxSpeed) cameraSpeedAdd = cameraMinSpeed + currentScore * cameraAscelleration;
             if (Mathf.Abs(cameraSpeed) < 0.1f) cameraSpeed = 0f;
             float cameraNewPositionY = cameraCurrentPositionY + cameraSpeed * Time.deltaTime;
             if (cameraNewPositionY > cameraCurrentPositionY)
@@ -49,4 +60,8 @@ public class RaceCameraScript : MonoBehaviour
         }
         if (ball.transform.position.y > 1) isGameStarted = true;
     }
+   // public void SetScoresCamera(int scores)
+   // {
+   //     currentScore = scores;
+   // }
 }

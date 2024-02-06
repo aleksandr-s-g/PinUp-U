@@ -143,5 +143,8 @@ public class GameControllerRace : MonoBehaviour
         }
         
     }
-
+   // public int getCurretnScore()
+   // {
+   //     return currentScore;
+   // }
 }
