@@ -13,42 +13,56 @@ public class Ball : MonoBehaviour
     //public delegate void SomeAction();
     public UnityAction onCoinCollected;
     public Rigidbody2D rb;
-    public CircleCollider2D cc2d;
+    public CircleCollider2D collider2d;
     public float startVelocity = 30f;
-    public float resetTime = 2f;
+    //public float resetTime = 2f;
+    public float ballAcceleration = 5;
     float minAbsVelocity = 0.1f;
     private bool isReseting = false;
-    private Vector2 ballPosition;
+    //private Vector2 ballPosition;
     private Vector2 ballTargetPosition;
+    //private Vector2 velocity = Vector2.zero;
+    private float deccelerationY  = 0f;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        cc2d = GetComponent<CircleCollider2D>();
+        collider2d = GetComponent<CircleCollider2D>();
         //onCoinCollected+=GameController.instance.CoinCollected;
     }
 
     // Update is called once per frame
     void Update()
     {
-        ballPosition = rb.position;
-        if (isReseting)
+       if (isReseting)
         {
-            cc2d.enabled = false;
+            collider2d.enabled = false;
+            Vector2 direction = (ballTargetPosition - rb.position).normalized;
+            
             if (Mathf.Sqrt(rb.velocity.x * rb.velocity.x + rb.velocity.y * rb.velocity.y ) < minAbsVelocity)
             {
-                Vector2 direction = (ballTargetPosition - ballPosition).normalized;
-                 
-                Vector2 velocity = direction * startVelocity;
-                                
-                rb.velocity = velocity;
+
+                rb.velocity = direction * startVelocity/10;
+                               
             }
-            if (rb.position.y > ballTargetPosition.y)
+            else
+            {
+                if (rb.position.y < deccelerationY)
+                {
+                    rb.velocity = (rb.velocity + direction * ballAcceleration * Time.deltaTime);
+                }
+                else
+                {
+                    rb.velocity = (rb.velocity - direction * ballAcceleration * Time.deltaTime);
+                }
+            }
+            if (ballTargetPosition.y - rb.position.y < 1)
             {
                 rb.velocity = Vector2.zero;
+                rb.position = ballTargetPosition;
                 isReseting = false;
-                cc2d.enabled = true;
+                collider2d.enabled = true;
             }
         }
     }
@@ -74,7 +88,8 @@ public class Ball : MonoBehaviour
     {
         //rb.position = new Vector3(3f, targetYPosition, 0f);
         isReseting = true;
-        ballTargetPosition = new Vector2 (3, targetYPosition);
+        ballTargetPosition = new Vector2 (3.5f, targetYPosition - 0.5f);
+        deccelerationY = (targetYPosition - rb.position.y)/2 + rb.position.y;
     }
-
+    
 }

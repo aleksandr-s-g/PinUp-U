@@ -1392,7 +1392,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  collider2d: {fileID: 0}
   startVelocity: 70
+  ballAcceleration: 100
 --- !u!50 &622325037
 Rigidbody2D:
   serializedVersion: 4
