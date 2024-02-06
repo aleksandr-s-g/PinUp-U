@@ -15,6 +15,7 @@ public class Ball : MonoBehaviour
     public Rigidbody2D rb;
     public CircleCollider2D collider2d;
     public float startVelocity = 30f;
+    public float resetVelocity = 30f;
     //public float resetTime = 2f;
     public float ballAcceleration = 5;
     float minAbsVelocity = 0.1f;
@@ -43,7 +44,7 @@ public class Ball : MonoBehaviour
             if (Mathf.Sqrt(rb.velocity.x * rb.velocity.x + rb.velocity.y * rb.velocity.y ) < minAbsVelocity)
             {
 
-                rb.velocity = direction * startVelocity/10;
+                rb.velocity = direction * resetVelocity;
                                
             }
             else
@@ -90,6 +91,7 @@ public class Ball : MonoBehaviour
         isReseting = true;
         ballTargetPosition = new Vector2 (3.5f, targetYPosition - 0.5f);
         deccelerationY = (targetYPosition - rb.position.y)/2 + rb.position.y;
+        rb.velocity = Vector2.zero;
     }
     
 }

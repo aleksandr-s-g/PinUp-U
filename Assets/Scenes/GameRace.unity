@@ -1394,7 +1394,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   collider2d: {fileID: 0}
   startVelocity: 70
-  ballAcceleration: 100
+  resetVelocity: 50
+  ballAcceleration: 30
 --- !u!50 &622325037
 Rigidbody2D:
   serializedVersion: 4
