@@ -1393,6 +1393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   collider2d: {fileID: 0}
+  Camera: {fileID: 242174592}
   startVelocity: 70
   resetVelocity: 50
   ballAcceleration: 30

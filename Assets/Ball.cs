@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
     public UnityAction onCoinCollected;
     public Rigidbody2D rb;
     public CircleCollider2D collider2d;
+    public GameObject Camera;
     public float startVelocity = 30f;
     public float resetVelocity = 30f;
     //public float resetTime = 2f;
@@ -89,6 +90,10 @@ public class Ball : MonoBehaviour
     {
         //rb.position = new Vector3(3f, targetYPosition, 0f);
         isReseting = true;
+        if (rb.position.y < Camera.transform.position.y - 10)
+        {
+            rb.position = new Vector2(rb.position.x ,  Camera.transform.position.y - 10);
+        }
         ballTargetPosition = new Vector2 (3.5f, targetYPosition - 0.5f);
         deccelerationY = (targetYPosition - rb.position.y)/2 + rb.position.y;
         rb.velocity = Vector2.zero;
