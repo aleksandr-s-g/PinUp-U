@@ -96,6 +96,7 @@ public class GameControllerRace : MonoBehaviour
                     if (!isTimerExpired1)
                     {
                         isTimerExpired1 = true;
+                        Ball.gameObject.SetActive(false);
                         looseTimer = 5f;
                         LosePanel1.SetActive(false);
                         LosePanel2.SetActive(true);
@@ -113,6 +114,7 @@ public class GameControllerRace : MonoBehaviour
             {
                 LosePanel1.SetActive(false);
                 LosePanel2.SetActive(false);
+                Ball.gameObject.SetActive(true);
                 isLoosing = false;
                 looseTimer = 3f;
                 isTimerExpired1 = false;
@@ -132,6 +134,7 @@ public class GameControllerRace : MonoBehaviour
             {
                 currentCoins = currentCoins - 10;
                 resetTargetY = (Mathf.FloorToInt(Camera.transform.position.y / 20) + resetDistance) * 20;
+                Ball.gameObject.SetActive(true);
                 Ball.GetComponent<Ball>().ResetBall(resetTargetY);
             }
         }
@@ -141,6 +144,7 @@ public class GameControllerRace : MonoBehaviour
             {
                 currentCoins = currentCoins - 5;
                 resetTargetY = (Mathf.FloorToInt(Camera.transform.position.y / 20) + resetDistance) * 20;
+                Ball.gameObject.SetActive(true);
                 Ball.GetComponent<Ball>().ResetBall(resetTargetY);
             }
         }
