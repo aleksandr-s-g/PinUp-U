@@ -22,6 +22,7 @@ public class GameControllerRace : MonoBehaviour
     bool isLoosing = false;
     bool isTimerExpired1 = false;
     bool isTimerExpired2 = false;
+    bool isGameStarted = false;
     public float looseTimer = 3f;
     SaveManager saveManager;
     HUDRace hudrace;
@@ -49,6 +50,7 @@ public class GameControllerRace : MonoBehaviour
         hudrace.SetBestRace(currentBest);
         hudrace.SetButtonInteractable(true);
         isLoosing = false;
+        isGameStarted = false;
     }
     public void CoinCollected()
     {
@@ -59,6 +61,7 @@ public class GameControllerRace : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Ball.transform.position.y > 2) isGameStarted = true;
         if ((int)Ball.transform.position.y > currentScore)
         {
             currentScore = (int)Ball.transform.position.y;            
@@ -72,7 +75,7 @@ public class GameControllerRace : MonoBehaviour
         }
          hudrace.SetScores(currentScore);
          hudrace.SetCoins(currentCoins);
-        if (!isLoosing) 
+        if (!isLoosing && isGameStarted) 
         {
             if (Ball.transform.position.y < Camera.transform.position.y - loseDistance)
             {
