@@ -5076,7 +5076,7 @@ MonoBehaviour:
   Camera: {fileID: 242174592}
   loseDistance: 10
   resetDistance: 3
-  looseTimer: 5
+  looseTimer: 3
 --- !u!4 &1987824803
 Transform:
   m_ObjectHideFlags: 0

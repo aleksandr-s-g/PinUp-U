@@ -22,7 +22,7 @@ public class GameControllerRace : MonoBehaviour
     bool isLoosing = false;
     bool isTimerExpired1 = false;
     bool isTimerExpired2 = false;
-    public float looseTimer = 5f;
+    public float looseTimer = 3f;
     SaveManager saveManager;
     HUDRace hudrace;
     
@@ -111,7 +111,7 @@ public class GameControllerRace : MonoBehaviour
                 LosePanel1.SetActive(false);
                 LosePanel2.SetActive(false);
                 isLoosing = false;
-                looseTimer = 5f;
+                looseTimer = 3f;
                 isTimerExpired1 = false;
                 isTimerExpired2 = false;
                 hudrace.SetButtonInteractable(true);
