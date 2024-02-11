@@ -133,6 +133,7 @@ public class GameControllerRace : MonoBehaviour
             if (currentCoins >= 10)
             {
                 currentCoins = currentCoins - 10;
+                saveManager.setCoins(currentCoins);
                 resetTargetY = (Mathf.FloorToInt(Camera.transform.position.y / 20) + resetDistance) * 20;
                 Ball.gameObject.SetActive(true);
                 Ball.GetComponent<Ball>().ResetBall(resetTargetY);
@@ -143,6 +144,7 @@ public class GameControllerRace : MonoBehaviour
             if (currentCoins >= 5)
             {
                 currentCoins = currentCoins - 5;
+                saveManager.setCoins(currentCoins);
                 resetTargetY = (Mathf.FloorToInt(Camera.transform.position.y / 20) + resetDistance) * 20;
                 Ball.gameObject.SetActive(true);
                 Ball.GetComponent<Ball>().ResetBall(resetTargetY);
