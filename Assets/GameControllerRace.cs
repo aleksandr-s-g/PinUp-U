@@ -61,7 +61,7 @@ public class GameControllerRace : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Ball.transform.position.y > 2) isGameStarted = true;
+        if (Ball.transform.position.y > 1) isGameStarted = true;
         if ((int)Ball.transform.position.y > currentScore)
         {
             currentScore = (int)Ball.transform.position.y;            
