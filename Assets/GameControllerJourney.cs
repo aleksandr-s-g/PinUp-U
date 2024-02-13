@@ -52,4 +52,8 @@ public class GameControllerJourney : MonoBehaviour
         hudjourney.SetScores(currentScore + loadedScore);
         hudjourney.SetCoins(currentCoins);
     }
+    public void DoubleTap()
+    {
+      
+    }
 }
