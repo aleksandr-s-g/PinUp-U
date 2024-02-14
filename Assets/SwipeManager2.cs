@@ -6,13 +6,13 @@ public class SwipeManager2 : MonoBehaviour
 {
     public Vector2 startPos;
     public Vector2 vector;
-    public float min_swipe_len = 30f;
+    float min_swipe_len;
     public float max_diagonal_factor = 0.3f;
     //string message;
     Vector2 direction;
     public GameObject Ball;
     public float maxTimeBetweenTaps = 0.5f;
-    public float maxDistanceBetweenTaps = 5f;
+    float maxDistanceBetweenTaps;
     private int tapCount = 0;
     private float lastTapTime = 0f;
     private Vector2 lastTapPosition;
@@ -20,6 +20,8 @@ public class SwipeManager2 : MonoBehaviour
     void Start()
     {
         direction = new Vector2(0, 0);
+        maxDistanceBetweenTaps = Screen.dpi*0.2f;//0.2 inch
+        min_swipe_len = Screen.dpi*0.1f;//0.1 inch
     }
 
     void Update()

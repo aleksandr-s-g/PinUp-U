@@ -4,38 +4,56 @@ public class TouchInputManager : MonoBehaviour
 {
     public Vector2 startPos;
     public Vector2 vector;
-    public float min_swipe_len = 30f;
+    float min_swipe_len;
     public float max_diagonal_factor = 0.3f;
     //string message;
     Vector2 direction;
     public GameObject Ball;
     public float maxTimeBetweenTaps = 0.5f;
-    public float maxDistanceBetweenTaps = 5f;
+    float maxDistanceBetweenTaps;
     private int tapCount = 0;
     private float lastTapTime = 0f;
     private Vector2 lastTapPosition;
     public GameObject GameController;
     void Start(){
         direction = new Vector2(0,0);
+        maxDistanceBetweenTaps = Screen.dpi*0.2f;//0.2 inch
+        min_swipe_len = Screen.dpi*0.1f;//0.1 inch
     }
     
     void Update()
     {        
         if (Input.touchCount > 0)
         {
+            //Debug.Log("Input.touchCount = " + Input.touchCount);
+            
             Touch touch = Input.GetTouch(0);
+            //Debug.Log("touch.phase = " + touch.phase);
             switch (touch.phase)
             {
+                
                 //When a touch has first been detected, change the message and record the starting position
                 case TouchPhase.Began:
                     // Record initial touch position.
                     startPos = touch.position;
-                    //message = "Begun ";
+                    if (Time.time - lastTapTime < maxTimeBetweenTaps &&
+                        Vector2.Distance(touch.position, lastTapPosition) < maxDistanceBetweenTaps)
+                    {
+                        // Double tap detected
+                        tapCount = 0; // Reset tap count
+                        DoubleTapped();
+                    }
+                    else
+                    {
+                        // Single tap detected
+                        tapCount++;
+                        lastTapTime = Time.time;
+                        lastTapPosition = touch.position;
+                    }
                     break;
 
                 //Determine if the touch is a moving touch
                 case TouchPhase.Moved:
-                    // Determine direction by comparing the current touch position with the initial one
                     vector = touch.position - startPos;
                     float swipe_len = Mathf.Sqrt(vector.x*vector.x+vector.y*vector.y);
                     if(swipe_len > min_swipe_len)
@@ -67,39 +85,7 @@ public class TouchInputManager : MonoBehaviour
                         
                         startPos = touch.position;
                     }
-                   // message = "Moving ";
-                    //if (direction.x*direction.x+direction.)
-                    //Debug.Log(Mathf.Sqrt(direction.x*direction.x+direction.y*direction.y));
                     break;
-
-                case TouchPhase.Ended:
-                    // Report that the touch has ended when it ends
-                   // message = "Ending ";
-                    break;
-            }
-            //Debug.Log(message);
-        }
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            if (touch.phase == TouchPhase.Began)
-            {
-                if (Time.time - lastTapTime < maxTimeBetweenTaps &&
-                    Vector2.Distance(touch.position, lastTapPosition) < maxDistanceBetweenTaps)
-                {
-                    // Double tap detected
-                    // Debug.Log("Double tap detected!");
-                    tapCount = 0; // Reset tap count
-                    DoubleTapped();
-                }
-                else
-                {
-                    // Single tap detected
-                    tapCount++;
-                    lastTapTime = Time.time;
-                    lastTapPosition = touch.position;
-                }
             }
         }
     }
