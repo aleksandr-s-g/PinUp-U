@@ -9,6 +9,8 @@ public class MainMenu : MonoBehaviour
 {
     public string gameMode = "journey";
     public GameObject SaveManager;
+    public GameObject Analytics;
+    Analytics analytics;
     SaveManager saveManager;
     public Toggle toggleRace;
     public Toggle toggleJourney;
@@ -19,6 +21,7 @@ public class MainMenu : MonoBehaviour
         if (state) 
         {
             gameMode = "journey";
+            analytics.AnalyticsEvent("q", "w", "e", "r");
         }
     }
     public void onGameModeRaceClicked(bool state)
@@ -26,6 +29,7 @@ public class MainMenu : MonoBehaviour
         if (state)
         {
             gameMode = "race";
+            analytics.AnalyticsEvent("a", "s", "d", "f");
         }
     }
     public void onStartClicked()
@@ -50,6 +54,7 @@ public class MainMenu : MonoBehaviour
         toggleRace.group = toggleGroup;
         toggleJourney.group = toggleGroup;
         saveManager = SaveManager.GetComponent<SaveManager>();
+        analytics = Analytics.GetComponent<Analytics>();
         gameMode = saveManager.getGameMode();
         if (gameMode != "journey" && gameMode != "race")
         {
