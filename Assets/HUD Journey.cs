@@ -18,14 +18,14 @@ public class HUDJourney : MonoBehaviour
     void Start()
     {
         scoresLabel.text = "777";
-        //Debug.Log("hud started");
+        
     }
 
     // Update is called once per frame
     void Update()
 
     {
-       // Debug.Log("hud upd");
+       
         if ( m_timeCounter < m_refreshTime )
     {
         m_timeCounter += Time.deltaTime;

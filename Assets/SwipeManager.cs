@@ -25,10 +25,10 @@ public class TouchInputManager : MonoBehaviour
     {        
         if (Input.touchCount > 0)
         {
-            //Debug.Log("Input.touchCount = " + Input.touchCount);
+            
             
             Touch touch = Input.GetTouch(0);
-            //Debug.Log("touch.phase = " + touch.phase);
+            
             switch (touch.phase)
             {
                 

@@ -33,7 +33,7 @@ public class RaceCameraScript : MonoBehaviour
     void Update()
     {
       //  currentScore = gameControllerRace.getCurretnScore();
-       // Debug.Log(currentScore);
+       
         if ((int)ball.transform.position.y > currentScore)
         {
             currentScore = (int)ball.transform.position.y;
@@ -56,7 +56,7 @@ public class RaceCameraScript : MonoBehaviour
             {
                 transform.position = new Vector3(cameraStartpositionX, cameraNewPositionY, -1);
             }
-           // Debug.Log(cameraSpeedAdd);
+           
         }
         if (ball.transform.position.y > 1) isGameStarted = true;
     }

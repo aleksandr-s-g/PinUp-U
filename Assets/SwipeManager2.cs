@@ -74,7 +74,7 @@ public class SwipeManager2 : MonoBehaviour
                     }
                     // message = "Moving ";
                     //if (direction.x*direction.x+direction.)
-                    //Debug.Log(Mathf.Sqrt(direction.x*direction.x+direction.y*direction.y));
+                    
                     break;
 
                 case TouchPhase.Ended:
@@ -82,7 +82,7 @@ public class SwipeManager2 : MonoBehaviour
                     // message = "Ending ";
                     break;
             }
-            //Debug.Log(message);
+            
         }
         if (Input.touchCount > 0)
         {
@@ -94,7 +94,7 @@ public class SwipeManager2 : MonoBehaviour
                     Vector2.Distance(touch.position, lastTapPosition) < maxDistanceBetweenTaps)
                 {
                     // Double tap detected
-                    // Debug.Log("Double tap detected!");
+                    
                     tapCount = 0; // Reset tap count
                     DoubleTapped();
                 }

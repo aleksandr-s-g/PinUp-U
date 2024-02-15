@@ -28,14 +28,14 @@ public class HUDRace : MonoBehaviour
     {
         scoresLabel.text = "888";
         //button = GetComponent<Button>();
-        //Debug.Log("hud started");
+       
     }
 
     // Update is called once per frame
     void Update()
 
     {
-        // Debug.Log("hud upd");
+        
         if (m_timeCounter < m_refreshTime)
         {
             m_timeCounter += Time.deltaTime;
@@ -99,11 +99,11 @@ public class HUDRace : MonoBehaviour
     {
 
         GameController.GetComponent<GameControllerRace>().DoubleTap(); 
-        //Debug.Log("relife clicked");
+        
     }
     public void SetButtonInteractable(bool interactable)
     {
         button.interactable = interactable;
-        Debug.Log("Set interacteble: " + interactable.ToString());
+        
     }
 }

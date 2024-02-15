@@ -122,12 +122,11 @@ public class GameControllerRace : MonoBehaviour
                 hudrace.SetButtonInteractable(true);
             }
         }
-       // Debug.Log(currentScore);
-       // Debug.Log(currentCoins);
+       
     }
     public void DoubleTap()
     {
-        //Debug.Log("Double tap detected!");
+        
         if (isTimerExpired1 && !isTimerExpired2)
         {
             if (currentCoins >= 10)

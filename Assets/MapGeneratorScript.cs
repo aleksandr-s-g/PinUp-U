@@ -72,9 +72,7 @@ public class MapGeneratorScript : MonoBehaviour
         TextAsset asset = Resources.Load<TextAsset>("FileNames");
 
         string[] line_list = asset.text.Split("\n");
-        //Debug.Log(line_list.Length);
-       // Debug.Log(line_list[0].IndexOf("[journey_levels_list]", 0));
-       // Debug.Log(line_list[0].IndexOf("[journey_levels_list_ty]", 0));
+        
 
         int[] target_level_list_range = new int[2];
         target_level_list_range[0] = -1; //from
@@ -91,8 +89,7 @@ public class MapGeneratorScript : MonoBehaviour
             }
         }
         string[] level_list = new string[target_level_list_range[1]-target_level_list_range[0]+1];
-        Debug.Log(level_list.Length);
-        Debug.Log(level_list[1]);
+       
         for (int i = 0; i<level_list.Length;i++)
         {
             level_list[i] = line_list[i+target_level_list_range[0]];
@@ -114,7 +111,7 @@ public class MapGeneratorScript : MonoBehaviour
                 GameObject newBlock = Instantiate(blueBlockPrefub, new Vector3(10.5f, 0.5f+i+currentShift, 0), Quaternion.identity);
                 newBlock.transform.SetParent(transform);
             }
-       // Debug.Log(targetLevel);
+       
             string jsonString = Resources.Load<TextAsset>(targetLevel).text;
             curLvl = JsonUtility.FromJson<LevelDescripton>(jsonString);
             foreach (BlockDescripton b in curLvl.blocks)
