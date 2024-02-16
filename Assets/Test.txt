@@ -1,1 +1,1 @@
-1q2w3e4r
+{"event_name" : "net","event_details" : "ty","device_info" : "{"device_id": c7f9a225ad1ef9e3dccc7abd4c840100883e7f9b"fps": 0"global_ip"0.0.0.0"is_tester": True"locale": Russian"locale_language": Russian"model_name": GL753VE (ASUSTeK COMPUTER INC.)"os_name": Windows 10  (10.0.19045) 64bit"os_version": 10.0.19045.0"processor_name": Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz"screen_h": 1792"screen_w": 828"user_id": c7f9a225ad1ef9e3dccc7abd4c840100883e7f9b};","user_info" : "tester"}

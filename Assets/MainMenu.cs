@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
         if (state) 
         {
             gameMode = "journey";
-            analytics.AnalyticsEvent("q", "w", "e", "r");
+            analytics.AnalyticsEvent("net", "ty");
         }
     }
     public void onGameModeRaceClicked(bool state)
@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour
         if (state)
         {
             gameMode = "race";
-            analytics.AnalyticsEvent("a", "s", "d", "f");
+            analytics.AnalyticsEvent("ty", "pidor");
         }
     }
     public void onStartClicked()
