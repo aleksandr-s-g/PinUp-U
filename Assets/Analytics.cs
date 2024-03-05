@@ -5,14 +5,14 @@ using UnityEngine;
 using System.IO;
 using static UnityEngine.InputSystem.LowLevel.InputEventTrace;
 using UnityEngine.Networking;
+using System.Net;
 
 public class Analytics : MonoBehaviour
 {
-    string path = Application.dataPath + "/Test.txt";
-    string device_info;
-    string user_info = "tester";
-    float curentFps = 0f;
-    bool isTester = true;
+    public GameObject SaveManager;
+    SaveManager saveManager;
+    int curentFps = 0;
+   
     
     // Start is called before the first frame update
 
@@ -28,6 +28,7 @@ public class Analytics : MonoBehaviour
         public string global_ip;
         public int screenWidth;
         public int screenHeight;
+        public int fps;
               
     }
     DeviceInfo baseDeviceInfo = new DeviceInfo();
@@ -38,6 +39,7 @@ public class Analytics : MonoBehaviour
         public string ed2;
         public string ed3;
     }
+    EventDetails eventDetails = new EventDetails();
     [System.Serializable]
     private class UserInfo
     {
@@ -46,35 +48,63 @@ public class Analytics : MonoBehaviour
         public int currentScores;
         public int bestRaceScores; 
         public string installDate;
+        public string gameVersion;
+        public string buildNumber;
        
     }
+    UserInfo baseUserInfo = new UserInfo();
     [System.Serializable]
     private class AnalyticsEvent
     {
         public DeviceInfo device_info;
         public EventDetails event_details;
-        public UserInfo userInfo;
+        public UserInfo user_info;
         public string event_name;
     }
 
     void Start()
     {
-         baseDeviceInfo.deviceID = SystemInfo.deviceUniqueIdentifier.ToString();
-         baseDeviceInfo.language = Application.systemLanguage.ToString();
-         baseDeviceInfo.operatingSystem = SystemInfo.operatingSystem.ToString();
-         baseDeviceInfo.osVersion = System.Environment.OSVersion.Version.ToString();
-         baseDeviceInfo.deviceModel = SystemInfo.deviceModel.ToString();
-         baseDeviceInfo.processorModel = SystemInfo.processorType.ToString();
-         baseDeviceInfo.global_ip = "0.0.0.0";
-         baseDeviceInfo.screenWidth = Screen.currentResolution.width;
-         baseDeviceInfo.screenHeight = Screen.currentResolution.height;
+        saveManager = SaveManager.GetComponent<SaveManager>();
+        baseDeviceInfo.deviceID = SystemInfo.deviceUniqueIdentifier.ToString();
+        baseDeviceInfo.language = Application.systemLanguage.ToString();
+        baseDeviceInfo.operatingSystem = SystemInfo.operatingSystem.ToString();
+        baseDeviceInfo.osVersion = System.Environment.OSVersion.Version.ToString();
+        baseDeviceInfo.deviceModel = SystemInfo.deviceModel.ToString();
+        baseDeviceInfo.processorModel = SystemInfo.processorType.ToString();
+        baseDeviceInfo.global_ip = "0.0.0.0";
+        baseDeviceInfo.screenWidth = Screen.currentResolution.width;
+        baseDeviceInfo.screenHeight = Screen.currentResolution.height;
+        baseDeviceInfo.fps = 0;
+        baseUserInfo.uuid = saveManager.getUuid();
+        baseUserInfo.cuurentCoins = saveManager.getCoins();
+        baseUserInfo.currentScores = saveManager.getScores();
+        baseUserInfo.bestRaceScores = saveManager.getBestRace();
+        baseUserInfo.installDate = saveManager.getInstallDate();
+        baseUserInfo.gameVersion = Application.version;
+        baseUserInfo.buildNumber = GetBuildNumber();
+        //Debug.Log(baseUserInfo.uuid);
         //Debug.Log("Operating System: " + SystemInfo.operatingSystem.ToString());
-        
+
         StartCoroutine(GetIPAdress());
-       // Debug.Log("1");
+        // Debug.Log("1");
 
 
 
+    }
+    private string GetBuildNumber()
+    {
+#if UNITY_ANDROID
+        
+        AndroidJavaClass androidBuildClass = new AndroidJavaClass("android.os.Build");
+        string buildNumber = androidBuildClass.GetStatic<string>("DISPLAY");
+        return buildNumber;
+#elif UNITY_IOS
+        
+        return UnityEngine.iOS.Device.systemVersion;
+#else
+        
+        return "";
+#endif
     }
 
     IEnumerator GetIPAdress()
@@ -94,7 +124,7 @@ public class Analytics : MonoBehaviour
             }
             else
             {
-                Debug.Log("Error: " + webRequest.error);
+                //Debug.Log("Error: " + webRequest.error);
             }
         }
     }
@@ -102,29 +132,41 @@ public class Analytics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         curentFps = 1.0f / Time.deltaTime;
+        curentFps = Mathf.FloorToInt(1.0f / Time.deltaTime);
+        baseDeviceInfo.fps = curentFps;
+        //Debug.Log(curentFps);
     }
 
-   public void EmitAnalyticsEvent(string event_name, string event_details)
+   public void EmitAnalyticsEvent(string event_name, string ed1, string ed2, string ed3)
     {
-       AnalyticsEvent analyticsEvent = new AnalyticsEvent();
-       analyticsEvent.device_info = baseDeviceInfo;
-       analyticsEvent.event_name = event_name;
+        event_name = "test-" + event_name;
+        eventDetails.ed1 = ed1;
+        eventDetails.ed2 = ed2;
+        eventDetails.ed3 = ed3;
+        AnalyticsEvent analyticsEvent = new AnalyticsEvent();
+        analyticsEvent.device_info = baseDeviceInfo;
+        analyticsEvent.event_name = event_name;
+        analyticsEvent.user_info = baseUserInfo;
+        analyticsEvent.event_details = eventDetails;
         StartCoroutine(SendEvent(analyticsEvent));
-       // SendEvent(analyticsEvent);
-        Debug.Log(event_name);
-        // File.WriteAllText(path, "{\"event_name\" : \"" + event_name + "\"," + "\"event_details\" : \"" + event_details + "\"," + "\"device_info\" : \"" + device_info + "\"," + "\"user_info\" : \"" + user_info + "\"}");
-        // Debug.Log(path);
+       
+        //Debug.Log(event_name);
+        
     }
     IEnumerator SendEvent(AnalyticsEvent analyticsEvent)
     {
         // URL, на который будем отправлять POST-запрос
         string url = "https://asgavril.ru/stat/log_event.php";
-        Debug.Log("11");
+        //Debug.Log("11");
 
         //string jsonData = JsonUtility.ToJson(analyticsEvent);
-        string jsonData = "{\"event_name\":\"" + analyticsEvent.event_name + "\", \"device_info\":\"" + JsonUtility.ToJson(analyticsEvent.device_info).Replace("\"","\\\"") + "\"}";
-        Debug.Log(jsonData);
+        string jsonData = "{\"event_name\":\"" +
+            analyticsEvent.event_name +
+            "\", \"event_details\":\"" + JsonUtility.ToJson(analyticsEvent.event_details).Replace("\"", "\\\"") +
+            "\", \"device_info\":\"" + JsonUtility.ToJson(analyticsEvent.device_info).Replace("\"","\\\"") +
+            "\", \"user_info\":\"" + JsonUtility.ToJson(analyticsEvent.user_info).Replace("\"", "\\\"") +
+            "\"}";
+        //Debug.Log(jsonData);
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
         var request = new UnityWebRequest(url, "POST");
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);

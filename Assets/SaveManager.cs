@@ -1,7 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 public class SaveManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class SaveManager : MonoBehaviour
         public int coins;
         public string uuid;
         public string gameMode;
+        public string installDate;
     }
 
     private string filePath = "gameSave.json";
@@ -29,6 +31,21 @@ public class SaveManager : MonoBehaviour
     {
         string jsonData = File.ReadAllText(Application.persistentDataPath + "/" + filePath);
         gameData = JsonUtility.FromJson<GameData>(jsonData);
+        
+        if (string.IsNullOrEmpty(gameData.uuid))
+        {
+            
+            Guid guid = Guid.NewGuid();
+            gameData.uuid = guid.ToString();
+           //Debug.Log(gameData.uuid);
+            Save();
+        }
+        if (string.IsNullOrEmpty(gameData.installDate))
+        {
+            gameData.installDate = DateTime.UtcNow.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+            
+            Save();
+        }
     }
 
     // Start is called before the first frame update
@@ -82,8 +99,17 @@ public class SaveManager : MonoBehaviour
         Load();
         return gameData.gameMode;
     }
+    public string getUuid()
+    {
+        Load();
+        return gameData.uuid;
+    }
 
-
+    public string getInstallDate()
+    {
+        Load();
+        return gameData.installDate;
+    }
     // Update is called once per frame
     void Update()
     {

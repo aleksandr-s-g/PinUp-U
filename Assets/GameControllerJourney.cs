@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class GameControllerJourney : MonoBehaviour
 {
     public GameObject Ball;
     public GameObject HUDJourney;
     public GameObject SaveManager;
-    
-    
+    public GameObject Analytics;
+    Analytics analytics;
+
     int currentScore;
     int currentCoins;
     int loadedScore;
@@ -29,16 +31,18 @@ public class GameControllerJourney : MonoBehaviour
     {
         Application.targetFrameRate = 240;
         hudjourney = HUDJourney.GetComponent<HUDJourney>();
-        
+        analytics = Analytics.GetComponent<Analytics>();
         saveManager = SaveManager.GetComponent<SaveManager>();
         currentScore = 0;
         currentCoins = saveManager.getCoins(); ;
         loadedScore = saveManager.getScores();
+        analytics.EmitAnalyticsEvent("journey_started", "", "", "");
     }
     public void CoinCollected()
     {
         currentCoins++;
         saveManager.setCoins(currentCoins);
+        analytics.EmitAnalyticsEvent("coin_collected", "journey", "", "");
     }
 
     // Update is called once per frame

@@ -1294,6 +1294,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6763145992022936998, guid: 8810d8bc009344b5fa49db08618daffe, type: 3}
   m_PrefabInstance: {fileID: 5579400349692715410}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &776068624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 776068626}
+  - component: {fileID: 776068625}
+  m_Layer: 0
+  m_Name: "\u0410nalytics"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &776068625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776068624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5c2adfb6073ca4c9b26941e08e1b2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveManager: {fileID: 1637736649}
+--- !u!4 &776068626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776068624}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 297.6911, y: 405.03003, z: 30.860682}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &829261017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,6 +1386,7 @@ MonoBehaviour:
   Ball: {fileID: 316659323}
   HUDJourney: {fileID: 1115884369}
   SaveManager: {fileID: 1637736649}
+  Analytics: {fileID: 776068624}
 --- !u!1 &1025476881
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,6 +1802,7 @@ MonoBehaviour:
   scoresLabel: {fileID: 1915242881}
   coinsLabel: {fileID: 1062556865}
   fPSLabel: {fileID: 1820943845}
+  Analytics: {fileID: 776068624}
   m_refreshTime: 1
 --- !u!1 &1267039793
 GameObject:
@@ -2521,11 +2568,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: {x: 0, y: 0}
   vector: {x: 0, y: 0}
-  min_swipe_len: 30
   max_diagonal_factor: 0.3
   Ball: {fileID: 316659323}
   maxTimeBetweenTaps: 0.5
-  maxDistanceBetweenTaps: 5
   GameController: {fileID: 829261017}
 --- !u!1 &1820943844
 GameObject:
@@ -3054,3 +3099,4 @@ SceneRoots:
   - {fileID: 620755724}
   - {fileID: 829261019}
   - {fileID: 1637736651}
+  - {fileID: 776068626}

@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
         if (state) 
         {
             gameMode = "journey";
-            analytics.EmitAnalyticsEvent("net", "ty");
+            analytics.EmitAnalyticsEvent("journey_mod_selected", "", "", "");
         }
     }
     public void onGameModeRaceClicked(bool state)
@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour
         if (state)
         {
             gameMode = "race";
-            analytics.EmitAnalyticsEvent("race mod selected", "pidor");
+            analytics.EmitAnalyticsEvent("race_mod_selected", "", "", "");
         }
     }
     public void onStartClicked()
@@ -45,8 +45,8 @@ public class MainMenu : MonoBehaviour
             SceneManager.LoadScene("GameRace", LoadSceneMode.Single);
             saveManager.setGameMode(gameMode);
         }
-        
-       
+        analytics.EmitAnalyticsEvent("start_clicked", gameMode.ToString(), "", "");
+
     }
     // Start is called before the first frame update
     void Start()
@@ -69,6 +69,7 @@ public class MainMenu : MonoBehaviour
         {
             toggleJourney.isOn = true;
         }
+        analytics.EmitAnalyticsEvent("launch", "", "", "");
     }
 
     // Update is called once per frame
