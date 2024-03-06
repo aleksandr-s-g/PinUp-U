@@ -10,16 +10,17 @@ public class MainMenu : MonoBehaviour
     public string gameMode = "journey";
     public GameObject SaveManager;
     public GameObject Analytics;
+    public GameObject TesterPanel;
     Analytics analytics;
     SaveManager saveManager;
     public Toggle toggleRace;
     public Toggle toggleJourney;
     public ToggleGroup toggleGroup;
-    public float testerClickInterval = 0.5f; 
+    public float testerClickInterval = 0.3f; 
     public int testerClickCountTarget = 10; 
     private int testerClickCount = 0; 
     private float testerLastClickTime = 0f; 
-    private bool isTester = false;
+    
     public void onTesterButtonClicked()
     {
         float currentTime = Time.time;
@@ -31,9 +32,20 @@ public class MainMenu : MonoBehaviour
 
             if (testerClickCount >= testerClickCountTarget)
             {
-                
+
                 Debug.Log("is tester");
-                isTester = true;
+                TesterPanel.SetActive(!TesterPanel.activeSelf);
+                saveManager.setTester(true);
+                testerClickCount = 0;
+                if (TesterPanel.activeSelf)
+                {
+                    analytics.EmitAnalyticsEvent("tester_panel", "on", "", "");
+                }
+                else
+                {
+                    analytics.EmitAnalyticsEvent("tester_panel", "off", "", "");
+                }
+                
             }
             else
             {
@@ -82,6 +94,18 @@ public class MainMenu : MonoBehaviour
         analytics.EmitAnalyticsEvent("start_clicked", gameMode.ToString(), "", "");
 
     }
+    public void onSetCoins1000Clicked()
+    {
+        saveManager.setCoins(1000);
+        analytics.EmitAnalyticsEvent("tester_set_coins", gameMode.ToString(), "1000", "");
+
+    }
+    public void onSetCoins0Clicked()
+    {
+        saveManager.setCoins(0);
+        analytics.EmitAnalyticsEvent("tester_set_coins", gameMode.ToString(), "0", "");
+
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -90,7 +114,7 @@ public class MainMenu : MonoBehaviour
         saveManager = SaveManager.GetComponent<SaveManager>();
         analytics = Analytics.GetComponent<Analytics>();
         gameMode = saveManager.getGameMode();
-        
+        TesterPanel.SetActive(false);
         if (gameMode != "journey" && gameMode != "race")
         {
             gameMode = "journey";

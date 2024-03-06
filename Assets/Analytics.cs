@@ -171,12 +171,12 @@ public class Analytics : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            Debug.Log("Post request successful!");
-            Debug.Log("Response: " + request.downloadHandler.text);
+            //Debug.Log("Post request successful!");
+            //Debug.Log("Response: " + request.downloadHandler.text);
         }
         else
         {
-            Debug.Log("Error: " + request.error);
+            //Debug.Log("Error: " + request.error);
         }
     }
 }
