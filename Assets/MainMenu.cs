@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,9 @@ public class MainMenu : MonoBehaviour
     public GameObject SaveManager;
     public GameObject Analytics;
     public GameObject TesterPanel;
+    public GameObject TestModePanel;
+    public GameObject Minimize;
+     
     Analytics analytics;
     SaveManager saveManager;
     public Toggle toggleRace;
@@ -19,8 +23,10 @@ public class MainMenu : MonoBehaviour
     public float testerClickInterval = 0.3f; 
     public int testerClickCountTarget = 10; 
     private int testerClickCount = 0; 
-    private float testerLastClickTime = 0f; 
+    private float testerLastClickTime = 0f;
     
+    
+
     public void onTesterButtonClicked()
     {
         float currentTime = Time.time;
@@ -33,8 +39,9 @@ public class MainMenu : MonoBehaviour
             if (testerClickCount >= testerClickCountTarget)
             {
 
-                Debug.Log("is tester");
+               // Debug.Log("is tester");
                 TesterPanel.SetActive(!TesterPanel.activeSelf);
+                TestModePanel.SetActive(!TesterPanel.activeSelf);
                 saveManager.setTester(true);
                 testerClickCount = 0;
                 if (TesterPanel.activeSelf)
@@ -49,14 +56,14 @@ public class MainMenu : MonoBehaviour
             }
             else
             {
-                Debug.Log(testerClickCount);
+               // Debug.Log(testerClickCount);
             }
         }
         else
         {
             
             testerClickCount = 1;
-            Debug.Log(testerClickCount);
+            //Debug.Log(testerClickCount);
         }
 
         
@@ -98,15 +105,26 @@ public class MainMenu : MonoBehaviour
     {
         saveManager.setCoins(1000);
         analytics.EmitAnalyticsEvent("tester_set_coins", gameMode.ToString(), "1000", "");
-
+        Debug.Log("coins 1000");
     }
     public void onSetCoins0Clicked()
     {
         saveManager.setCoins(0);
         analytics.EmitAnalyticsEvent("tester_set_coins", gameMode.ToString(), "0", "");
+        Debug.Log("coins 0");
+    }
+    public void onTesterCloseClicked()
+    {
+        TestModePanel.SetActive(false);
+    }
+    public void onTesterMinimizeClicked()
+    {
+        
+        TesterPanel.SetActive(!TesterPanel.activeSelf);
+        Minimize.transform.Rotate(0, 0, 180);
 
     }
-    // Start is called before the first frame update
+    
     void Start()
     {
         toggleRace.group = toggleGroup;
@@ -114,7 +132,8 @@ public class MainMenu : MonoBehaviour
         saveManager = SaveManager.GetComponent<SaveManager>();
         analytics = Analytics.GetComponent<Analytics>();
         gameMode = saveManager.getGameMode();
-        TesterPanel.SetActive(false);
+        
+        TestModePanel.SetActive(false);
         if (gameMode != "journey" && gameMode != "race")
         {
             gameMode = "journey";
