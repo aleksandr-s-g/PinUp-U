@@ -6,6 +6,7 @@ using System.IO;
 using static UnityEngine.InputSystem.LowLevel.InputEventTrace;
 using UnityEngine.Networking;
 using System.Net;
+using UnityEditor;
 
 public class Analytics : MonoBehaviour
 {
@@ -50,6 +51,7 @@ public class Analytics : MonoBehaviour
         public string installDate;
         public string gameVersion;
         public string buildNumber;
+        public bool isTester;
        
     }
     UserInfo baseUserInfo = new UserInfo();
@@ -82,6 +84,7 @@ public class Analytics : MonoBehaviour
         baseUserInfo.installDate = saveManager.getInstallDate();
         baseUserInfo.gameVersion = Application.version;
         baseUserInfo.buildNumber = GetBuildNumber();
+        baseUserInfo.isTester = saveManager.getTester();
         //Debug.Log(baseUserInfo.uuid);
         //Debug.Log("Operating System: " + SystemInfo.operatingSystem.ToString());
 
@@ -93,18 +96,8 @@ public class Analytics : MonoBehaviour
     }
     private string GetBuildNumber()
     {
-#if UNITY_ANDROID
-        
-        AndroidJavaClass androidBuildClass = new AndroidJavaClass("android.os.Build");
-        string buildNumber = androidBuildClass.GetStatic<string>("DISPLAY");
-        return buildNumber;
-#elif UNITY_IOS
-        
-        return UnityEngine.iOS.Device.systemVersion;
-#else
-        
-        return "";
-#endif
+
+        return ("undifined");
     }
 
     IEnumerator GetIPAdress()

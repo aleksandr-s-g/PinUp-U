@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -15,7 +15,41 @@ public class MainMenu : MonoBehaviour
     public Toggle toggleRace;
     public Toggle toggleJourney;
     public ToggleGroup toggleGroup;
+    public float testerClickInterval = 0.5f; 
+    public int testerClickCountTarget = 10; 
+    private int testerClickCount = 0; 
+    private float testerLastClickTime = 0f; 
+    private bool isTester = false;
+    public void onTesterButtonClicked()
+    {
+        float currentTime = Time.time;
 
+        
+        if (currentTime - testerLastClickTime < testerClickInterval)
+        {
+            testerClickCount++;
+
+            if (testerClickCount >= testerClickCountTarget)
+            {
+                
+                Debug.Log("is tester");
+                isTester = true;
+            }
+            else
+            {
+                Debug.Log(testerClickCount);
+            }
+        }
+        else
+        {
+            
+            testerClickCount = 1;
+            Debug.Log(testerClickCount);
+        }
+
+        
+        testerLastClickTime = currentTime;
+    }
     public void onGameModeJourneyClicked(bool state)
     {
         if (state) 
@@ -56,6 +90,7 @@ public class MainMenu : MonoBehaviour
         saveManager = SaveManager.GetComponent<SaveManager>();
         analytics = Analytics.GetComponent<Analytics>();
         gameMode = saveManager.getGameMode();
+        
         if (gameMode != "journey" && gameMode != "race")
         {
             gameMode = "journey";
@@ -77,4 +112,5 @@ public class MainMenu : MonoBehaviour
     {
         
     }
+
 }

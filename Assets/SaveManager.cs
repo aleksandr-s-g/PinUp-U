@@ -15,6 +15,7 @@ public class SaveManager : MonoBehaviour
         public string uuid;
         public string gameMode;
         public string installDate;
+        public bool isTester;
     }
 
     private string filePath = "gameSave.json";
@@ -55,6 +56,17 @@ public class SaveManager : MonoBehaviour
         
     }
 
+    public void setTester(bool isTester)
+    {
+        gameData.isTester = isTester;
+        Save();
+    }
+
+    public bool getTester()
+    {
+        Load();
+        return gameData.isTester;
+    }
     public void setScores(int s)
     {
         gameData.scores = s;
