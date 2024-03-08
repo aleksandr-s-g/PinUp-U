@@ -8,15 +8,20 @@ using UnityEngine.Events;
 
 public class MainController : MonoBehaviour
 {
-   /* void Awake()
-    {
-        GetComponent<MainMenu>().startClicked.AddListener(onStartClicked);
-    }    */
+    /* void Awake()
+     {
+         GetComponent<MainMenu>().startClicked.AddListener(onStartClicked);
+     }    */
+
+    public GameObject Analytics;
+    Analytics analytics;
+    
+
     // Start is called before the first frame update
     void Start()
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
-        
+        analytics = Analytics.GetComponent<Analytics>();
     }
 
     // Update is called once per frame
@@ -26,7 +31,7 @@ public class MainController : MonoBehaviour
     }
     public void onStartClicked(string gameMode)
     {
-        Debug.Log("onStartClicked");
+        
         if (gameMode == "journey")
         {
             SceneManager.LoadScene("GameJourney", LoadSceneMode.Additive);
@@ -40,7 +45,7 @@ public class MainController : MonoBehaviour
             SceneManager.UnloadSceneAsync("MainMenu");
         }
         //analytics.EmitAnalyticsEvent("start_clicked", gameMode.ToString(), "", "");
-        Debug.Log("1");
+        
 
     }
     public void onBackButtonClicked(string gameMode)
@@ -48,5 +53,10 @@ public class MainController : MonoBehaviour
         //analytics.EmitAnalyticsEvent("back_button_clicked", gameMode, "", "");
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(gameMode);
+    }
+    public void EmitAnalyticsEvent(string event_name, string ed1, string ed2, string ed3)
+    {
+        analytics.EmitAnalyticsEvent(event_name, ed1, ed2, ed3);
+
     }
 }

@@ -10,8 +10,7 @@ public class GameControllerJourney : MonoBehaviour
     public GameObject Ball;
     public GameObject HUDJourney;
     public GameObject SaveManager;
-    public GameObject Analytics;
-    Analytics analytics;
+    MainController mainController;
 
     int currentScore;
     int currentCoins;
@@ -31,20 +30,21 @@ public class GameControllerJourney : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainController = GameObject.FindGameObjectWithTag("MainTag").GetComponent<MainController>();
         Application.targetFrameRate = 240;
         hudjourney = HUDJourney.GetComponent<HUDJourney>();
-        analytics = Analytics.GetComponent<Analytics>();
+        
         saveManager = SaveManager.GetComponent<SaveManager>();
         currentScore = 0;
         currentCoins = saveManager.getCoins(); ;
         loadedScore = saveManager.getScores();
-        analytics.EmitAnalyticsEvent("journey_started", "", "", "");
+        mainController.EmitAnalyticsEvent("journey_started", "", "", "");
     }
     public void CoinCollected()
     {
         currentCoins++;
         saveManager.setCoins(currentCoins);
-        analytics.EmitAnalyticsEvent("coin_collected", "journey", "", "");
+        mainController.EmitAnalyticsEvent("coin_collected", "journey", "", "");
     }
 
     // Update is called once per frame

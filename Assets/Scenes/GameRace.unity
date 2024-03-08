@@ -4882,51 +4882,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1835123330}
   m_CullTransparentMesh: 1
---- !u!1 &1854483563
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1854483565}
-  - component: {fileID: 1854483564}
-  m_Layer: 0
-  m_Name: "\u0410nalytics"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1854483564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854483563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a5c2adfb6073ca4c9b26941e08e1b2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SaveManager: {fileID: 0}
---- !u!4 &1854483565
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854483563}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 297.6911, y: 405.03003, z: 30.860682}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1987668730
 GameObject:
   m_ObjectHideFlags: 0
@@ -5120,7 +5075,7 @@ MonoBehaviour:
   LosePanel1: {fileID: 560592989}
   LosePanel2: {fileID: 1555582096}
   Camera: {fileID: 242174592}
-  Analytics: {fileID: 1854483563}
+  Analytics: {fileID: 0}
   loseDistance: 10
   resetDistance: 3
   looseTimer: 3
@@ -5273,7 +5228,7 @@ MonoBehaviour:
   GameController: {fileID: 1987824801}
   button: {fileID: 1025923573}
   rotationSpeed: 90
-  Analytics: {fileID: 1854483563}
+  Analytics: {fileID: 0}
   m_refreshTime: 0.5
 --- !u!1 &2035048313
 GameObject:
@@ -5338,4 +5293,3 @@ SceneRoots:
   - {fileID: 622325040}
   - {fileID: 1801946051}
   - {fileID: 301681763}
-  - {fileID: 1854483565}

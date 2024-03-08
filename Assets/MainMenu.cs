@@ -11,12 +11,12 @@ public class MainMenu : MonoBehaviour
 {
     public string gameMode = "journey";
     public GameObject SaveManager;
-    public GameObject Analytics;
+    
     public GameObject TesterPanel;
     public GameObject TestModePanel;
     public GameObject Minimize;
      
-    Analytics analytics;
+    
     SaveManager saveManager;
     public Toggle toggleRace;
     public Toggle toggleJourney;
@@ -48,11 +48,11 @@ public class MainMenu : MonoBehaviour
                 testerClickCount = 0;
                 if (TesterPanel.activeSelf)
                 {
-                    analytics.EmitAnalyticsEvent("tester_panel", "on", "", "");
+                    mainController.EmitAnalyticsEvent("tester_panel", "on", "", "");
                 }
                 else
                 {
-                    analytics.EmitAnalyticsEvent("tester_panel", "off", "", "");
+                    mainController.EmitAnalyticsEvent("tester_panel", "off", "", "");
                 }
                 
             }
@@ -76,7 +76,7 @@ public class MainMenu : MonoBehaviour
         if (state) 
         {
             gameMode = "journey";
-            analytics.EmitAnalyticsEvent("journey_mod_selected", "", "", "");
+            mainController.EmitAnalyticsEvent("journey_mod_selected", "", "", "");
         }
     }
     public void onGameModeRaceClicked(bool state)
@@ -84,7 +84,7 @@ public class MainMenu : MonoBehaviour
         if (state)
         {
             gameMode = "race";
-            analytics.EmitAnalyticsEvent("race_mod_selected", "", "", "");
+            mainController.EmitAnalyticsEvent("race_mod_selected", "", "", "");
         }
     }
    public void onStartClicked()
@@ -108,14 +108,14 @@ public class MainMenu : MonoBehaviour
     public void onSetCoins1000Clicked()
     {
         saveManager.setCoins(1000);
-        analytics.EmitAnalyticsEvent("tester_set_coins", gameMode.ToString(), "1000", "");
-        Debug.Log("coins 1000");
+        mainController.EmitAnalyticsEvent("tester_set_coins", gameMode.ToString(), "1000", "");
+       // Debug.Log("coins 1000");
     }
     public void onSetCoins0Clicked()
     {
         saveManager.setCoins(0);
-        analytics.EmitAnalyticsEvent("tester_set_coins", gameMode.ToString(), "0", "");
-        Debug.Log("coins 0");
+        mainController.EmitAnalyticsEvent("tester_set_coins", gameMode.ToString(), "0", "");
+        //Debug.Log("coins 0");
     }
     public void onTesterCloseClicked()
     {
@@ -135,7 +135,7 @@ public class MainMenu : MonoBehaviour
         toggleRace.group = toggleGroup;
         toggleJourney.group = toggleGroup;
         saveManager = SaveManager.GetComponent<SaveManager>();
-        analytics = Analytics.GetComponent<Analytics>();
+        
         gameMode = saveManager.getGameMode();
         mainController = GameObject.FindGameObjectWithTag("MainTag").GetComponent<MainController>();
         
@@ -153,7 +153,7 @@ public class MainMenu : MonoBehaviour
         {
             toggleJourney.isOn = true;
         }
-        analytics.EmitAnalyticsEvent("launch", "", "", "");
+        mainController.EmitAnalyticsEvent("launch", "", "", "");
     }
 
     // Update is called once per frame
