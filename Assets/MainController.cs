@@ -22,6 +22,7 @@ public class MainController : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         analytics = Analytics.GetComponent<Analytics>();
+        analytics.EmitAnalyticsEvent("launch", "", "", "");
     }
 
     // Update is called once per frame

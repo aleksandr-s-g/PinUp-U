@@ -153,7 +153,7 @@ public class MainMenu : MonoBehaviour
         {
             toggleJourney.isOn = true;
         }
-        mainController.EmitAnalyticsEvent("launch", "", "", "");
+        
     }
 
     // Update is called once per frame
