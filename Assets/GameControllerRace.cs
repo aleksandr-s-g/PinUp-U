@@ -12,8 +12,7 @@ public class GameControllerRace : MonoBehaviour
     public GameObject LosePanel1;
     public GameObject LosePanel2;
     public GameObject Camera;
-    public GameObject Analytics;
-    Analytics analytics;
+    MainController mainController;
 
     public float loseDistance = 30f;
     public int resetDistance = 3;
@@ -40,12 +39,13 @@ public class GameControllerRace : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainController = GameObject.FindGameObjectWithTag("MainTag").GetComponent<MainController>();
         Application.targetFrameRate = 240;
         hudrace = HUDRace.GetComponent<HUDRace>();
         LosePanel1.SetActive(false);
         LosePanel2.SetActive(false);
         saveManager = SaveManager.GetComponent<SaveManager>();
-        analytics = Analytics.GetComponent<Analytics>();
+        
         currentScore = 0;
         currentCoins = saveManager.getCoins();
         currentBest = saveManager.getBestRace();
@@ -53,13 +53,13 @@ public class GameControllerRace : MonoBehaviour
         hudrace.SetButtonInteractable(true);
         isLoosing = false;
         isGameStarted = false;
-        analytics.EmitAnalyticsEvent("race_started", "", "", "");
+        mainController.EmitAnalyticsEvent("race_started", "", "", "");
     }
     public void CoinCollected()
     {
         currentCoins++;
         saveManager.setCoins(currentCoins);
-        analytics.EmitAnalyticsEvent("coin_collected", "race", "", "");
+        mainController.EmitAnalyticsEvent("coin_collected", "race", "", "");
     }
 
     // Update is called once per frame
@@ -86,7 +86,7 @@ public class GameControllerRace : MonoBehaviour
                 LosePanel1.SetActive(true);
                 isLoosing = true;
                 hudrace.SetTimer(looseTimer);
-                analytics.EmitAnalyticsEvent("going_to_lose", "", "", "");
+                mainController.EmitAnalyticsEvent("going_to_lose", "", "", "");
             }
         }
         
@@ -105,7 +105,7 @@ public class GameControllerRace : MonoBehaviour
                         looseTimer = 5f;
                         LosePanel1.SetActive(false);
                         LosePanel2.SetActive(true);
-                        analytics.EmitAnalyticsEvent("lose_race", "", "", "");
+                        mainController.EmitAnalyticsEvent("lose_race", "", "", "");
                         if (currentCoins <= 10) hudrace.SetButtonInteractable(false);
                     }
                     else
@@ -126,7 +126,7 @@ public class GameControllerRace : MonoBehaviour
                 isTimerExpired1 = false;
                 isTimerExpired2 = false;
                 hudrace.SetButtonInteractable(true);
-                analytics.EmitAnalyticsEvent("not_going_to_lose", "", "", "");
+                mainController.EmitAnalyticsEvent("not_going_to_lose", "", "", "");
             }
         }
        
@@ -143,9 +143,9 @@ public class GameControllerRace : MonoBehaviour
                 resetTargetY = (Mathf.FloorToInt(Camera.transform.position.y / 20) + resetDistance) * 20;
                 Ball.gameObject.SetActive(true);
                 Ball.GetComponent<Ball>().ResetBall(resetTargetY);
-                analytics.EmitAnalyticsEvent("skip_up", "10", "", "");
+                mainController.EmitAnalyticsEvent("skip_up", "10", "", "");
             }
-            analytics.EmitAnalyticsEvent("skip_up", "failed", "", "");
+            mainController.EmitAnalyticsEvent("skip_up", "failed", "", "");
         }
         if (!isTimerExpired1 && !isTimerExpired2)
         {
@@ -156,9 +156,9 @@ public class GameControllerRace : MonoBehaviour
                 resetTargetY = (Mathf.FloorToInt(Camera.transform.position.y / 20) + resetDistance) * 20;
                 Ball.gameObject.SetActive(true);
                 Ball.GetComponent<Ball>().ResetBall(resetTargetY);
-                analytics.EmitAnalyticsEvent("skip_up", "5", "", "");
+                mainController.EmitAnalyticsEvent("skip_up", "5", "", "");
             }
-            analytics.EmitAnalyticsEvent("skip_up", "failed", "", "");
+            mainController.EmitAnalyticsEvent("skip_up", "failed", "", "");
         }
         
     }

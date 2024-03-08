@@ -9,9 +9,9 @@ public class HUDJourney : MonoBehaviour
     public TextMeshProUGUI scoresLabel;
     public TextMeshProUGUI coinsLabel;
     public TextMeshProUGUI fPSLabel;
-    // Start is called before the first frame update
-    public GameObject Analytics;
-    Analytics analytics;
+   
+    
+    MainController mainController;
     int m_frameCounter = 0;
     float m_timeCounter = 0.0f;
     float m_lastFramerate = 0.0f;
@@ -19,7 +19,8 @@ public class HUDJourney : MonoBehaviour
     void Start()
     {
         scoresLabel.text = "777";
-        analytics = Analytics.GetComponent<Analytics>();
+        
+        mainController = GameObject.FindGameObjectWithTag("MainTag").GetComponent<MainController>();
     }
 
     // Update is called once per frame
@@ -59,9 +60,9 @@ public class HUDJourney : MonoBehaviour
     public void onBackButtonClicked()
     {
 
-        analytics.EmitAnalyticsEvent("back_button_clicked", "journey", "", ""); 
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-        
+        mainController.EmitAnalyticsEvent("back_button_clicked", "journey", "", "");
+        //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        mainController.onBackButtonClicked("GameJourney");
     }
     
     

@@ -9,18 +9,20 @@ using UnityEngine.Events;
 
 public class MainController : MonoBehaviour
 {
+
     public GameObject FBAnalitycs;
+    public GameObject Analytics;
     FBAnalitycs fbAnalitycs;
-   /* void Awake()
-    {
-        GetComponent<MainMenu>().startClicked.AddListener(onStartClicked);
-    }    */
+    Analytics analytics;
+    
+
     // Start is called before the first frame update
     void Start()
     {
         fbAnalitycs = FBAnalitycs.GetComponent<FBAnalitycs>();
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
-        
+        analytics = Analytics.GetComponent<Analytics>();
+        analytics.EmitAnalyticsEvent("launch", "", "", "");
     }
 
     // Update is called once per frame
@@ -30,8 +32,10 @@ public class MainController : MonoBehaviour
     }
     public void onStartClicked(string gameMode)
     {
+
         Debug.Log("onStartClicked");
         fbAnalitycs.EmitFBAnalyticsEvent("start_clicked", gameMode);
+
         if (gameMode == "journey")
         {
             SceneManager.LoadScene("GameJourney", LoadSceneMode.Additive);
@@ -45,6 +49,7 @@ public class MainController : MonoBehaviour
             SceneManager.UnloadSceneAsync("MainMenu");
         }
         //analytics.EmitAnalyticsEvent("start_clicked", gameMode.ToString(), "", "");
+        
 
     }
     public void onBackButtonClicked(string gameMode)
@@ -54,5 +59,10 @@ public class MainController : MonoBehaviour
         SceneManager.UnloadSceneAsync(gameMode);
     }
 
-   
+    public void EmitAnalyticsEvent(string event_name, string ed1, string ed2, string ed3)
+    {
+        analytics.EmitAnalyticsEvent(event_name, ed1, ed2, ed3);
+
+    }
+
 }

@@ -19,8 +19,8 @@ public class HUDRace : MonoBehaviour
     public Button button;
     public float rotationSpeed = 90f;
     // Start is called before the first frame update
-    public GameObject Analytics;
-    Analytics analytics;
+    
+    MainController mainController;
     int m_frameCounter = 0;
     float m_timeCounter = 0.0f;
     float m_lastFramerate = 0.0f;
@@ -29,7 +29,8 @@ public class HUDRace : MonoBehaviour
     {
         scoresLabel.text = "888";
         //button = GetComponent<Button>();
-        analytics = Analytics.GetComponent<Analytics>();
+        
+        mainController = GameObject.FindGameObjectWithTag("MainTag").GetComponent<MainController>();
     }
 
     // Update is called once per frame
@@ -89,19 +90,20 @@ public class HUDRace : MonoBehaviour
 
     public void onBackButtonClicked()
     {
-        analytics.EmitAnalyticsEvent("back_button_clicked", "race", "", "");
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-        
+        mainController.EmitAnalyticsEvent("back_button_clicked", "race", "", "");
+        // SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        mainController.onBackButtonClicked("GameRace");
+
     }
     public void onRestartClickedRace()
     {
-        analytics.EmitAnalyticsEvent("restart_clicked", "", "", "");
+        mainController.EmitAnalyticsEvent("restart_clicked", "", "", "");
         SceneManager.LoadScene("GameRace", LoadSceneMode.Single);
     }
     public void onReslifeClickedRace()
     {
 
-        analytics.EmitAnalyticsEvent("relife_clicked", "", "", "");
+        mainController.EmitAnalyticsEvent("relife_clicked", "", "", "");
         GameController.GetComponent<GameControllerRace>().DoubleTap(); 
         
     }
