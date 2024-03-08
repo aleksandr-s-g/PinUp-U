@@ -40,6 +40,7 @@ public class MainController : MonoBehaviour
             SceneManager.UnloadSceneAsync("MainMenu");
         }
         //analytics.EmitAnalyticsEvent("start_clicked", gameMode.ToString(), "", "");
+        Debug.Log("1");
 
     }
     public void onBackButtonClicked(string gameMode)

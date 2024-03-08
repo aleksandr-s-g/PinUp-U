@@ -12,6 +12,7 @@ public class HUDJourney : MonoBehaviour
     // Start is called before the first frame update
     public GameObject Analytics;
     Analytics analytics;
+    MainController mainController;
     int m_frameCounter = 0;
     float m_timeCounter = 0.0f;
     float m_lastFramerate = 0.0f;
@@ -20,6 +21,7 @@ public class HUDJourney : MonoBehaviour
     {
         scoresLabel.text = "777";
         analytics = Analytics.GetComponent<Analytics>();
+        mainController = GameObject.FindGameObjectWithTag("MainTag").GetComponent<MainController>();
     }
 
     // Update is called once per frame
@@ -59,9 +61,9 @@ public class HUDJourney : MonoBehaviour
     public void onBackButtonClicked()
     {
 
-        analytics.EmitAnalyticsEvent("back_button_clicked", "journey", "", ""); 
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-        
+        analytics.EmitAnalyticsEvent("back_button_clicked", "journey", "", "");
+        //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        mainController.onBackButtonClicked("GameJourney");
     }
     
     

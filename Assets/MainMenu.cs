@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour
     public int testerClickCountTarget = 10; 
     private int testerClickCount = 0; 
     private float testerLastClickTime = 0f;
-    public UnityEvent<string> startClicked;
+    MainController mainController;
 
 
 
@@ -89,7 +89,7 @@ public class MainMenu : MonoBehaviour
     }
    public void onStartClicked()
     {
-         if (gameMode == "journey")
+        /* if (gameMode == "journey")
          {
              SceneManager.LoadScene("GameJourney", LoadSceneMode.Single);
              saveManager.setGameMode(gameMode);
@@ -100,8 +100,9 @@ public class MainMenu : MonoBehaviour
              SceneManager.LoadScene("GameRace", LoadSceneMode.Single);
              saveManager.setGameMode(gameMode);
          }
-         analytics.EmitAnalyticsEvent("start_clicked", gameMode.ToString(), "", "");
-       // startClicked.Invoke(gameMode);
+         analytics.EmitAnalyticsEvent("start_clicked", gameMode.ToString(), "", "");*/
+        // startClicked.Invoke(gameMode);
+        mainController.onStartClicked(gameMode);
 
     }
     public void onSetCoins1000Clicked()
@@ -136,6 +137,7 @@ public class MainMenu : MonoBehaviour
         saveManager = SaveManager.GetComponent<SaveManager>();
         analytics = Analytics.GetComponent<Analytics>();
         gameMode = saveManager.getGameMode();
+        mainController = GameObject.FindGameObjectWithTag("MainTag").GetComponent<MainController>();
         
         TestModePanel.SetActive(false);
         if (gameMode != "journey" && gameMode != "race")
