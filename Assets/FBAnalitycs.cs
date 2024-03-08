@@ -56,9 +56,11 @@ public void EmitFBAnalyticsEvent(string event_name, string event_details)
     var tutParams = new Dictionary<string, object>();
     tutParams[AppEventParameterName.Description] = event_details;
     FB.LogAppEvent (
-        event_name,
+        Application.platform.ToString()+'-'+event_name,
+        //event_name,
         parameters: tutParams
     );
+    Debug.Log(Application.platform.ToString());
     Debug.Log("FBA: "+event_name);
 }
 
