@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedAppIndex: 0
   clientTokens:
-  - 
+  - 4093983fffb10dda7cf638da9b36dc97
   appIds:
-  - 0
+  - 1064209344694032
   appLabels:
-  - App Name
+  - PinUp-U
   cookie: 1
   logging: 1
   status: 1
