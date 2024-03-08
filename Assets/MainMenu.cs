@@ -124,6 +124,7 @@ public class MainMenu : MonoBehaviour
     {
         
         TesterPanel.SetActive(!TesterPanel.activeSelf);
+
         Minimize.transform.Rotate(0, 0, 180);
 
     }
