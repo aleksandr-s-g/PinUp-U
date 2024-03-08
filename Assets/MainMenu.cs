@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class MainMenu : MonoBehaviour
 {
@@ -24,8 +25,9 @@ public class MainMenu : MonoBehaviour
     public int testerClickCountTarget = 10; 
     private int testerClickCount = 0; 
     private float testerLastClickTime = 0f;
-    
-    
+    public UnityEvent<string> startClicked;
+
+
 
     public void onTesterButtonClicked()
     {
@@ -85,20 +87,21 @@ public class MainMenu : MonoBehaviour
             analytics.EmitAnalyticsEvent("race_mod_selected", "", "", "");
         }
     }
-    public void onStartClicked()
+   public void onStartClicked()
     {
-        if (gameMode == "journey")
-        {
-            SceneManager.LoadScene("GameJourney", LoadSceneMode.Single);
-            saveManager.setGameMode(gameMode);
+         if (gameMode == "journey")
+         {
+             SceneManager.LoadScene("GameJourney", LoadSceneMode.Single);
+             saveManager.setGameMode(gameMode);
 
-        }
-        if (gameMode == "race")
-        {
-            SceneManager.LoadScene("GameRace", LoadSceneMode.Single);
-            saveManager.setGameMode(gameMode);
-        }
-        analytics.EmitAnalyticsEvent("start_clicked", gameMode.ToString(), "", "");
+         }
+         if (gameMode == "race")
+         {
+             SceneManager.LoadScene("GameRace", LoadSceneMode.Single);
+             saveManager.setGameMode(gameMode);
+         }
+         analytics.EmitAnalyticsEvent("start_clicked", gameMode.ToString(), "", "");
+       // startClicked.Invoke(gameMode);
 
     }
     public void onSetCoins1000Clicked()
