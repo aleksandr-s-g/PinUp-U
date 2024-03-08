@@ -18,7 +18,7 @@ public class Analytics : MonoBehaviour
     // Start is called before the first frame update
 
     [System.Serializable]
-    private class DeviceInfo
+    public class DeviceInfo
     {
         public string deviceID;
         public string language;
@@ -42,7 +42,7 @@ public class Analytics : MonoBehaviour
     }
     EventDetails eventDetails = new EventDetails();
     [System.Serializable]
-    private class UserInfo
+    public class UserInfo
     {
         public string uuid;
         public int cuurentCoins;
@@ -145,6 +145,14 @@ public class Analytics : MonoBehaviour
        
         //Debug.Log(event_name);
         
+    }
+    public DeviceInfo GetBaseDeviceInfo()
+    {
+        return baseDeviceInfo;
+    }
+    public UserInfo GetBaseUserInfo()
+    {
+        return baseUserInfo;
     }
     IEnumerator SendEvent(AnalyticsEvent analyticsEvent)
     {

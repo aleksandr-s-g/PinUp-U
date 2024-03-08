@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using static Analytics;
 
 public class MainController : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class MainController : MonoBehaviour
 
     public GameObject Analytics;
     Analytics analytics;
-    
+    bool isTesterModeOn = false;
 
     // Start is called before the first frame update
     void Start()
@@ -59,5 +60,21 @@ public class MainController : MonoBehaviour
     {
         analytics.EmitAnalyticsEvent(event_name, ed1, ed2, ed3);
 
+    }
+    public DeviceInfo GetBaseDeviceInfo()
+    {
+        return analytics.GetBaseDeviceInfo();        
+    }
+    public UserInfo GetBaseUserInfo()
+    {
+        return analytics.GetBaseUserInfo();
+    }
+    public void SetTesterModeIsOn(bool isOn)
+    {
+        isTesterModeOn = isOn;
+    }
+    public bool GetTesterModeIsOn()
+    {
+        return isTesterModeOn;
     }
 }

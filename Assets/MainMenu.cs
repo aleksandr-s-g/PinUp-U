@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -15,8 +16,9 @@ public class MainMenu : MonoBehaviour
     public GameObject TesterPanel;
     public GameObject TestModePanel;
     public GameObject Minimize;
-     
-    
+
+    float fpsTimer = 0f;
+    float fpsSecondPerUpdate = 1f;
     SaveManager saveManager;
     public Toggle toggleRace;
     public Toggle toggleJourney;
@@ -27,7 +29,9 @@ public class MainMenu : MonoBehaviour
     private float testerLastClickTime = 0f;
     MainController mainController;
 
-
+    public TextMeshProUGUI testHeadText;
+    public TextMeshProUGUI testBodyText;
+    bool isTesterModeOn = false;
 
     public void onTesterButtonClicked()
     {
@@ -45,14 +49,18 @@ public class MainMenu : MonoBehaviour
                 TesterPanel.SetActive(!TesterPanel.activeSelf);
                 TestModePanel.SetActive(!TesterPanel.activeSelf);
                 saveManager.setTester(true);
+                isTesterModeOn = TestModePanel.activeSelf;
+                mainController.SetTesterModeIsOn(isTesterModeOn);
                 testerClickCount = 0;
                 if (TesterPanel.activeSelf)
                 {
                     mainController.EmitAnalyticsEvent("tester_panel", "on", "", "");
+                    
                 }
                 else
                 {
                     mainController.EmitAnalyticsEvent("tester_panel", "off", "", "");
+                    
                 }
                 
             }
@@ -120,6 +128,8 @@ public class MainMenu : MonoBehaviour
     public void onTesterCloseClicked()
     {
         TestModePanel.SetActive(false);
+        isTesterModeOn = TestModePanel.activeSelf;
+        mainController.SetTesterModeIsOn(isTesterModeOn);
     }
     public void onTesterMinimizeClicked()
     {
@@ -136,10 +146,10 @@ public class MainMenu : MonoBehaviour
         toggleJourney.group = toggleGroup;
         saveManager = SaveManager.GetComponent<SaveManager>();
         
-        gameMode = saveManager.getGameMode();
         mainController = GameObject.FindGameObjectWithTag("MainTag").GetComponent<MainController>();
-        
-        TestModePanel.SetActive(false);
+        isTesterModeOn = mainController.GetTesterModeIsOn();
+        gameMode = saveManager.getGameMode();
+        TestModePanel.SetActive(isTesterModeOn);
         if (gameMode != "journey" && gameMode != "race")
         {
             gameMode = "journey";
@@ -159,7 +169,24 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //mainController.GetBaseDeviceInfo();
+        //testHeadText.text = "TEST MODE\r\nFPS: " + mainController.GetBaseDeviceInfo().fps.ToString();
+        if (isTesterModeOn)
+        {
+            fpsTimer = fpsTimer + Time.deltaTime;
+            if (fpsTimer > fpsSecondPerUpdate)
+            {
+                fpsTimer = 0;
+                testHeadText.text = "TEST MODE\r\nFPS: " + mainController.GetBaseDeviceInfo().fps.ToString();
+               /* testBodyText.text = "UUID: " + mainController.GetBaseUserInfo().uuid.ToString() +
+                    "\r\nIP: " + mainController.GetBaseDeviceInfo().global_ip.ToString() +
+                    "\r\nDeviceInfo:" + mainController.GetBaseDeviceInfo().ToString();  */
+            }
+            
+        }
         
+        
+
     }
 
 }
