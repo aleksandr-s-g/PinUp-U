@@ -7,20 +7,20 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using static Analytics;
 
+
 public class MainController : MonoBehaviour
 {
-    /* void Awake()
-     {
-         GetComponent<MainMenu>().startClicked.AddListener(onStartClicked);
-     }    */
 
+    public GameObject FBAnalitycs;
     public GameObject Analytics;
+    FBAnalitycs fbAnalitycs;
     Analytics analytics;
     bool isTesterModeOn = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        fbAnalitycs = FBAnalitycs.GetComponent<FBAnalitycs>();
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         analytics = Analytics.GetComponent<Analytics>();
         analytics.EmitAnalyticsEvent("launch", "", "", "");
@@ -33,7 +33,10 @@ public class MainController : MonoBehaviour
     }
     public void onStartClicked(string gameMode)
     {
-        
+
+        Debug.Log("onStartClicked");
+        fbAnalitycs.EmitFBAnalyticsEvent("start_clicked", gameMode);
+
         if (gameMode == "journey")
         {
             SceneManager.LoadScene("GameJourney", LoadSceneMode.Additive);
@@ -56,11 +59,13 @@ public class MainController : MonoBehaviour
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(gameMode);
     }
+
     public void EmitAnalyticsEvent(string event_name, string ed1, string ed2, string ed3)
     {
         analytics.EmitAnalyticsEvent(event_name, ed1, ed2, ed3);
 
     }
+
     public DeviceInfo GetBaseDeviceInfo()
     {
         return analytics.GetBaseDeviceInfo();        
@@ -77,4 +82,7 @@ public class MainController : MonoBehaviour
     {
         return isTesterModeOn;
     }
+
+
+
 }
