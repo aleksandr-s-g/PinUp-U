@@ -9,8 +9,16 @@ public class HUDJourney : MonoBehaviour
     public TextMeshProUGUI scoresLabel;
     public TextMeshProUGUI coinsLabel;
     public TextMeshProUGUI fPSLabel;
-   
-    
+
+    public float testerClickInterval = 0.3f;
+    public int testerClickCountTarget = 10;
+    private int testerClickCount = 0;
+    private float testerLastClickTime = 0f;
+    public GameObject TesterPanel;
+    public GameObject TestModePanel;
+    public GameObject Minimize;
+    public GameObject SaveManager;
+    SaveManager saveManager;
     MainController mainController;
     int m_frameCounter = 0;
     float m_timeCounter = 0.0f;
@@ -64,6 +72,51 @@ public class HUDJourney : MonoBehaviour
         //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         mainController.onBackButtonClicked("GameJourney");
     }
-    
-    
+    public void onTesterButtonClicked()
+    {
+        float currentTime = Time.time;
+
+
+        if (currentTime - testerLastClickTime < testerClickInterval)
+        {
+            testerClickCount++;
+
+            if (testerClickCount >= testerClickCountTarget)
+            {
+
+                // Debug.Log("is tester");
+                TesterPanel.SetActive(!TesterPanel.activeSelf);
+                TestModePanel.SetActive(!TesterPanel.activeSelf);
+                saveManager.setTester(true);
+                isTesterModeOn = TestModePanel.activeSelf;
+                mainController.SetTesterModeIsOn(isTesterModeOn);
+                testerClickCount = 0;
+                if (TesterPanel.activeSelf)
+                {
+                    mainController.EmitAnalyticsEvent("tester_panel", "on", "", "");
+
+                }
+                else
+                {
+                    mainController.EmitAnalyticsEvent("tester_panel", "off", "", "");
+
+                }
+
+            }
+            else
+            {
+                // Debug.Log(testerClickCount);
+            }
+        }
+        else
+        {
+
+            testerClickCount = 1;
+            //Debug.Log(testerClickCount);
+        }
+
+
+        testerLastClickTime = currentTime;
+    }
+
 }
