@@ -57,6 +57,7 @@ public class GameControllerRace : MonoBehaviour
     }
     public void CoinCollected()
     {
+        currentCoins = saveManager.getCoins();
         currentCoins++;
         saveManager.setCoins(currentCoins);
         mainController.EmitAnalyticsEvent("coin_collected", "race", "", "");

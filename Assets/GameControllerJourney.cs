@@ -36,12 +36,13 @@ public class GameControllerJourney : MonoBehaviour
         
         saveManager = SaveManager.GetComponent<SaveManager>();
         currentScore = 0;
-        currentCoins = saveManager.getCoins(); ;
+        currentCoins = saveManager.getCoins();
         loadedScore = saveManager.getScores();
         mainController.EmitAnalyticsEvent("journey_started", "", "", "");
     }
     public void CoinCollected()
     {
+        currentCoins = saveManager.getCoins();
         currentCoins++;
         saveManager.setCoins(currentCoins);
         mainController.EmitAnalyticsEvent("coin_collected", "journey", "", "");
