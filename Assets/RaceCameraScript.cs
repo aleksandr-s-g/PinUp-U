@@ -23,7 +23,9 @@ public class RaceCameraScript : MonoBehaviour
         float singleBlockPxSize = Screen.width / sceneWidth;
         cameraStartpositionY = Screen.height * 0.5f / singleBlockPxSize;
         cameraStartpositionX = 5f;
-        Camera.main.orthographicSize = orthoSize;
+        Camera.allCameras[0].orthographicSize = orthoSize;
+        //Camera.main.orthographicSize = orthoSize;
+        //Camera.current.orthographicSize = orthoSize;
         transform.position = new Vector3(cameraStartpositionX, cameraStartpositionY, -1);
         cameraSpeedAdd = cameraMinSpeed;
      //   gameControllerRace = gameControllerRace.GetComponent<GameControllerRace>();

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Coin
   - MainTag
+  - GameCamera
   layers:
   - Default
   - TransparentFX
