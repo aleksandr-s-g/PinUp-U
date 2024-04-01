@@ -60,7 +60,7 @@ public void EmitFBAnalyticsEvent(string event_name, string event_details)
         //event_name,
         parameters: tutParams
     );
-    Debug.Log(Application.platform.ToString());
+    //Debug.Log(Application.platform.ToString());
     Debug.Log("FBA: "+event_name);
 }
 
