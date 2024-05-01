@@ -609,6 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FBAnalitycs: {fileID: 1357579475}
   Analytics: {fileID: 2025621398}
+  ADManager: {fileID: 743918360}
 --- !u!4 &545019581
 Transform:
   m_ObjectHideFlags: 0

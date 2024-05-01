@@ -113,6 +113,11 @@ public class MainMenu : MonoBehaviour
         mainController.onStartClicked(gameMode);
 
     }
+    public void onRewardedClicked()
+    {
+        mainController.onRewardedClicked();
+        mainController.EmitAnalyticsEvent("rewarded_clicked", gameMode.ToString(), "", "");
+    }
     public void onSetCoins1000Clicked()
     {
         saveManager.setCoins(1000);

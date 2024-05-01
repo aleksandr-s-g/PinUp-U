@@ -13,8 +13,10 @@ public class MainController : MonoBehaviour
 
     public GameObject FBAnalitycs;
     public GameObject Analytics;
+    public GameObject ADManager;
     FBAnalitycs fbAnalitycs;
     Analytics analytics;
+    ADManager adManager;
     bool isTesterModeOn = false;
 
     // Start is called before the first frame update
@@ -23,12 +25,19 @@ public class MainController : MonoBehaviour
         fbAnalitycs = FBAnalitycs.GetComponent<FBAnalitycs>();
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         analytics = Analytics.GetComponent<Analytics>();
+        adManager = ADManager.GetComponent<ADManager>();
         analytics.EmitAnalyticsEvent("launch", "", "", "");
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
+    public void onRewardedClicked()
+    {
+        Debug.Log("onRewardedClicked");
+        adManager.ShowRewarded();
         
     }
     public void onStartClicked(string gameMode)
