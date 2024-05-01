@@ -36,9 +36,12 @@ public class MainController : MonoBehaviour
     }
     public void onRewardedClicked()
     {
-        Debug.Log("onRewardedClicked");
         adManager.ShowRewarded();
         
+    }
+    public void onApplovinClicked()
+    {
+        adManager.ShowMediationDebugger();
     }
     public void onStartClicked(string gameMode)
     {
@@ -71,6 +74,7 @@ public class MainController : MonoBehaviour
 
     public void EmitAnalyticsEvent(string event_name, string ed1, string ed2, string ed3)
     {
+        Debug.Log("IA: " + event_name);
         analytics.EmitAnalyticsEvent(event_name, ed1, ed2, ed3);
 
     }

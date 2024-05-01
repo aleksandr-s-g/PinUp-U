@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
+
 public class ADManager : MonoBehaviour
 {
+    public GameObject MainMenu;
+    MainMenu mainMenu;
+    public GameObject MainController;
     // Start is called before the first frame update
     void Start()
-    {
+    {       
             MaxSdkCallbacks.OnSdkInitializedEvent += (MaxSdkBase.SdkConfiguration sdkConfiguration) => {
             Debug.Log("AppLovin SDK is initialized, start loading ads");
-            MaxSdk.ShowMediationDebugger();
+            //MaxSdk.ShowMediationDebugger();
             InitializeRewardedAds();
     // AppLovin SDK is initialized, start loading ads
         }       ;
@@ -27,6 +32,10 @@ string adUnitId = "1d7abf7ca7fa580d";
 string adUnitId = "44804c914b209391";
 #endif
 int retryAttempt;
+
+public void ShowMediationDebugger(){
+    MaxSdk.ShowMediationDebugger();
+}
 
 public void InitializeRewardedAds()
 {
@@ -94,7 +103,9 @@ public void InitializeRewardedAds()
 
     private void OnRewardedAdReceivedRewardEvent(string adUnitId, MaxSdk.Reward reward, MaxSdkBase.AdInfo adInfo)
     {
+        mainMenu = GameObject.FindGameObjectWithTag("MainMenuTag").GetComponent<MainMenu>();
         Debug.Log("Applovin - OnRewardedAdReceivedRewardEvent");
+        mainMenu.rewardedSucceed();
         // The rewarded ad displayed and the user should receive the reward.
     }
 

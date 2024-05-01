@@ -7,6 +7,7 @@ public class MainTesterUI : MonoBehaviour
 {
     public GameObject TesterPanel;
     public GameObject TestModePanel;
+    
     public GameObject Minimize;
     public GameObject MainController;
     public GameObject SaveManager;
@@ -29,6 +30,7 @@ public class MainTesterUI : MonoBehaviour
     public void onTesterButtonClicked()
     {
         float currentTime = Time.time;
+        Debug.Log("onTesterButtonClicked");
         if (currentTime - testerLastClickTime < testerClickInterval)
         {
             testerClickCount++;
@@ -81,6 +83,12 @@ public class MainTesterUI : MonoBehaviour
        // mainController.EmitAnalyticsEvent("tester_set_coins", gameMode.ToString(), "0", "");
         //Debug.Log("coins 0");
     }
+    public void onApplovinClicked()
+    {
+        mainController.onApplovinClicked();
+    }
+
+
     public void onTesterCloseClicked()
     {
         TestModePanel.SetActive(false);

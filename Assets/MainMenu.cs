@@ -16,7 +16,8 @@ public class MainMenu : MonoBehaviour
     public GameObject TesterPanel;
     public GameObject TestModePanel;
     public GameObject Minimize;
-
+    public GameObject RewardedDialog;
+    public GameObject RewardedSucceedMsg;
     float fpsTimer = 0f;
     float fpsSecondPerUpdate = 1f;
     SaveManager saveManager;
@@ -113,11 +114,31 @@ public class MainMenu : MonoBehaviour
         mainController.onStartClicked(gameMode);
 
     }
-    public void onRewardedClicked()
+    public void onRewardedWatchClicked()
     {
+        
         mainController.onRewardedClicked();
+        RewardedDialog.SetActive(false);
         mainController.EmitAnalyticsEvent("rewarded_clicked", gameMode.ToString(), "", "");
     }
+    public void onRewardedClicked()
+    {
+        RewardedDialog.SetActive(true);
+    }
+    public void onRewardedCloseClicked()
+    {
+        RewardedDialog.SetActive(false);
+    }
+
+    public void onRewardedSucceedMsgCloseClicked(){
+        RewardedSucceedMsg.SetActive(false);
+    }
+    public void rewardedSucceed(){
+        saveManager.setCoins(saveManager.getCoins()+100);
+        RewardedSucceedMsg.SetActive(true);
+    }
+
+
     public void onSetCoins1000Clicked()
     {
         saveManager.setCoins(1000);
