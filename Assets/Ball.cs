@@ -65,6 +65,7 @@ public class Ball : MonoBehaviour
                 rb.position = ballTargetPosition;
                 isReseting = false;
                 collider2d.enabled = true;
+                Swipe(new Vector2(0,1));
             }
         }
     }

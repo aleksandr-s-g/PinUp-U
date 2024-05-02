@@ -49,6 +49,12 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    public string getRawSaveText()
+    {
+        string jsonData = File.ReadAllText(Application.persistentDataPath + "/" + filePath);
+        return jsonData;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

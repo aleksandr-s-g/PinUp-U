@@ -14,6 +14,8 @@ public class MainController : MonoBehaviour
     public GameObject FBAnalitycs;
     public GameObject Analytics;
     public GameObject ADManager;
+    public GameObject SaveManager;
+    SaveManager saveManager;
     FBAnalitycs fbAnalitycs;
     Analytics analytics;
     ADManager adManager;
@@ -25,12 +27,17 @@ public class MainController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        saveManager = SaveManager.GetComponent<SaveManager>();
+        saveManager.setGameMode("race");
+        
         fbAnalitycs = FBAnalitycs.GetComponent<FBAnalitycs>();
+        
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         analytics = Analytics.GetComponent<Analytics>();
         adManager = ADManager.GetComponent<ADManager>();
-        analytics.EmitAnalyticsEvent("launch", "", "", "");
+        //analytics.EmitAnalyticsEvent("launch", "", "", "");
         lastInterstitialAdTime = Time.time;
+        
     }
 
     // Update is called once per frame
@@ -39,9 +46,18 @@ public class MainController : MonoBehaviour
         
     }
 
+    public string getStringDeviceInfo()
+    {
+        string di = analytics.getStringDeviceInfo();
+        return di;
+        
+        //return "some info";
+    }
+
     public void tryShowInterstitial()
     {
         float nowTime = Time.time;
+        analytics.EmitAnalyticsEvent("applovin_try_show_interstitial", nowTime.ToString(), (nowTime-lastInterstitialAdTime).ToString(), "");
         Debug.Log("tryShowInterstitial " + nowTime);
         if (nowTime > lastInterstitialAdTime+periodInterstitialAdTime)
         {
@@ -53,7 +69,7 @@ public class MainController : MonoBehaviour
     public void onRewardedClicked()
     {
         adManager.ShowRewarded();
-        
+        analytics.EmitAnalyticsEvent("applovin_rewarded_clicked", "", "", "");
     }
     public void onApplovinClicked()
     {
@@ -77,7 +93,7 @@ public class MainController : MonoBehaviour
             //saveManager.setGameMode(gameMode);
             SceneManager.UnloadSceneAsync("MainMenu");
         }
-        //analytics.EmitAnalyticsEvent("start_clicked", gameMode.ToString(), "", "");
+        analytics.EmitAnalyticsEvent("start_clicked", gameMode.ToString(), "", "");
         
 
     }

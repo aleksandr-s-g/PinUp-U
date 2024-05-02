@@ -39,6 +39,7 @@ public class MainTesterUI : MonoBehaviour
                  // Debug.Log("is tester");
                 TesterPanel.SetActive(!TesterPanel.activeSelf);
                 TestModePanel.SetActive(!TesterPanel.activeSelf);
+                testBodyText.text = saveManager.getRawSaveText() + "\n" + mainController.getStringDeviceInfo();
                 saveManager.setTester(true);
                 isTesterModeOn = TestModePanel.activeSelf;
                 mainController.SetTesterModeIsOn(isTesterModeOn);
@@ -113,8 +114,8 @@ public class MainTesterUI : MonoBehaviour
         isTesterModeOn = mainController.GetTesterModeIsOn();
         
         TestModePanel.SetActive(isTesterModeOn);
-
         
+
     }
 
     // Update is called once per frame

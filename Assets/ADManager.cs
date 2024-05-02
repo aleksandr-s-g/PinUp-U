@@ -10,11 +10,15 @@ public class ADManager : MonoBehaviour
     public GameObject MainMenu;
     MainMenu mainMenu;
     public GameObject MainController;
+    public GameObject Analytics;
+    Analytics analytics;
     // Start is called before the first frame update
     void Start()
-    {       
+    {       analytics = Analytics.GetComponent<Analytics>();
+
             MaxSdkCallbacks.OnSdkInitializedEvent += (MaxSdkBase.SdkConfiguration sdkConfiguration) => {
-            Debug.Log("AppLovin SDK is initialized, start loading ads");
+            //Debug.Log("AppLovin SDK is initialized, start loading ads");
+            analytics.EmitAnalyticsEvent("applovin_sdk_inited", "", "", "");
             //MaxSdk.ShowMediationDebugger();
             InitializeRewardedAds();
             InitializeInterstitialAds();
@@ -36,6 +40,7 @@ int retryAttempt;
 
 public void ShowMediationDebugger(){
     MaxSdk.ShowMediationDebugger();
+    analytics.EmitAnalyticsEvent("applovin_show_debugger", "", "", "");
 }
 
 public void InitializeRewardedAds()
@@ -57,13 +62,15 @@ public void InitializeRewardedAds()
 
     private void LoadRewardedAd()
     {
-            Debug.Log("Applovin - LoadRewardedAd");
+           // Debug.Log("Applovin - LoadRewardedAd");
         MaxSdk.LoadRewardedAd(adUnitId);
+        analytics.EmitAnalyticsEvent("applovin_rewarded_try_load", "", "", "");
     }
 
     private void OnRewardedAdLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
     {
-        Debug.Log("Applovin - OnRewardedAdLoadedEvent");
+        //Debug.Log("Applovin - OnRewardedAdLoadedEvent");
+        analytics.EmitAnalyticsEvent("applovin_rewarded_loaded", "", "", "");
         // Rewarded ad is ready for you to show. MaxSdk.IsRewardedAdReady(adUnitId) now returns 'true'.
 
         // Reset retry attempt
@@ -74,7 +81,8 @@ public void InitializeRewardedAds()
     {
         // Rewarded ad failed to load 
         // AppLovin recommends that you retry with exponentially higher delays, up to a maximum delay (in this case 64 seconds).
- Debug.Log("Applovin - OnRewardedAdLoadFailedEvent");
+ //Debug.Log("Applovin - OnRewardedAdLoadFailedEvent");
+        analytics.EmitAnalyticsEvent("applovin_rewarded_load_failed", "", "", "");
         retryAttempt++;
         double retryDelay = Math.Pow(2, Math.Min(6, retryAttempt));
         
@@ -83,12 +91,12 @@ public void InitializeRewardedAds()
 
     private void OnRewardedAdDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) {
 
-        Debug.Log("Applovin - OnRewardedAdDisplayedEvent");
+       // Debug.Log("Applovin - OnRewardedAdDisplayedEvent");
     }
 
     private void OnRewardedAdFailedToDisplayEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo, MaxSdkBase.AdInfo adInfo)
     {
-        Debug.Log("Applovin - OnRewardedAdFailedToDisplayEvent");
+        //Debug.Log("Applovin - OnRewardedAdFailedToDisplayEvent");
         // Rewarded ad failed to display. AppLovin recommends that you load the next ad.
         LoadRewardedAd();
     }
@@ -98,14 +106,16 @@ public void InitializeRewardedAds()
     private void OnRewardedAdHiddenEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
     {
         // Rewarded ad is hidden. Pre-load the next ad
-        Debug.Log("Applovin - OnRewardedAdHiddenEvent");
+        //Debug.Log("Applovin - OnRewardedAdHiddenEvent");
+        analytics.EmitAnalyticsEvent("applovin_rewarded_hidden", "", "", "");
         LoadRewardedAd();
     }
 
     private void OnRewardedAdReceivedRewardEvent(string adUnitId, MaxSdk.Reward reward, MaxSdkBase.AdInfo adInfo)
     {
         mainMenu = GameObject.FindGameObjectWithTag("MainMenuTag").GetComponent<MainMenu>();
-        Debug.Log("Applovin - OnRewardedAdReceivedRewardEvent");
+        //Debug.Log("Applovin - OnRewardedAdReceivedRewardEvent");
+        analytics.EmitAnalyticsEvent("applovin_rewarded_reward", "", "", "");
         mainMenu.rewardedSucceed();
         // The rewarded ad displayed and the user should receive the reward.
     }
@@ -122,10 +132,11 @@ public void InitializeRewardedAds()
     }
 public void ShowRewarded()
 {
-    Debug.Log("Applovin - ShowRewarded_try0");
+    //Debug.Log("Applovin - ShowRewarded_try0");
     if (MaxSdk.IsRewardedAdReady(adUnitId))
     {
-        Debug.Log("Applovin - ShowRewarded_try1");
+        //Debug.Log("Applovin - ShowRewarded_try1");
+        analytics.EmitAnalyticsEvent("applovin_rewarded_show", "", "", "");
         MaxSdk.ShowRewardedAd(adUnitId);
     }
 }
@@ -153,12 +164,13 @@ public void InitializeInterstitialAds()
 private void LoadInterstitial()
 {
     MaxSdk.LoadInterstitial(adUnitIdInter);
+    analytics.EmitAnalyticsEvent("applovin_interstitial_try_load", "", "", "");
 }
 
 private void OnInterstitialLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
 {
     // Interstitial ad is ready for you to show. MaxSdk.IsInterstitialReady(adUnitId) now returns 'true'
-
+    analytics.EmitAnalyticsEvent("applovin_interstitial_loaded", "", "", "");
     // Reset retry attempt
     retryAttemptInter = 0;
 }
@@ -167,7 +179,7 @@ private void OnInterstitialLoadFailedEvent(string adUnitId, MaxSdkBase.ErrorInfo
 {
     // Interstitial ad failed to load 
     // AppLovin recommends that you retry with exponentially higher delays, up to a maximum delay (in this case 64 seconds)
-
+    analytics.EmitAnalyticsEvent("applovin_interstitial_load_fail", "", "", "");
     retryAttemptInter++;
     double retryDelay = Math.Pow(2, Math.Min(6, retryAttemptInter));
     
@@ -192,10 +204,9 @@ private void OnInterstitialHiddenEvent(string adUnitId, MaxSdkBase.AdInfo adInfo
 
 public void ShowInterstitial()
 {
-    Debug.Log("Applovin - ShowInterstitial_try0");
     if (MaxSdk.IsInterstitialReady(adUnitIdInter))
     {
-        Debug.Log("Applovin - ShowInterstitial_try1");
+        analytics.EmitAnalyticsEvent("applovin_interstitial_show", "", "", "");
         MaxSdk.ShowInterstitial(adUnitIdInter);
     }
 }

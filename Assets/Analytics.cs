@@ -90,7 +90,7 @@ public class Analytics : MonoBehaviour
 
         StartCoroutine(GetIPAdress());
         // Debug.Log("1");
-
+        EmitAnalyticsEvent("launch", "", "", "");
 
 
     }
@@ -132,7 +132,7 @@ public class Analytics : MonoBehaviour
 
    public void EmitAnalyticsEvent(string event_name, string ed1, string ed2, string ed3)
     {
-        event_name = "test-" + event_name;
+        event_name = "" + event_name;
         eventDetails.ed1 = ed1;
         eventDetails.ed2 = ed2;
         eventDetails.ed3 = ed3;
@@ -153,6 +153,12 @@ public class Analytics : MonoBehaviour
     public UserInfo GetBaseUserInfo()
     {
         return baseUserInfo;
+    }
+
+    public string getStringDeviceInfo()
+    {
+        //return "some info23";
+        return JsonUtility.ToJson(baseDeviceInfo);
     }
     IEnumerator SendEvent(AnalyticsEvent analyticsEvent)
     {

@@ -10,7 +10,7 @@ using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
-    public string gameMode = "journey";
+    public string gameMode = "none";
     public GameObject SaveManager;
     
     public GameObject TesterPanel;
@@ -178,7 +178,7 @@ public class MainMenu : MonoBehaviour
         //TestModePanel.SetActive(isTesterModeOn);
         if (gameMode != "journey" && gameMode != "race")
         {
-            gameMode = "journey";
+            gameMode = "race";
             saveManager.setGameMode(gameMode);
         }
         if (gameMode == "race")
