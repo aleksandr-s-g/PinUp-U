@@ -17,6 +17,7 @@ public class ADManager : MonoBehaviour
             Debug.Log("AppLovin SDK is initialized, start loading ads");
             //MaxSdk.ShowMediationDebugger();
             InitializeRewardedAds();
+            InitializeInterstitialAds();
     // AppLovin SDK is initialized, start loading ads
         }       ;
 
@@ -126,6 +127,76 @@ public void ShowRewarded()
     {
         Debug.Log("Applovin - ShowRewarded_try1");
         MaxSdk.ShowRewardedAd(adUnitId);
+    }
+}
+#if UNITY_IOS
+string adUnitIdInter = "e04f3ab520ab4127";
+#else // UNITY_ANDROID
+string adUnitIdInter = "16381f122f1aaeda";
+#endif
+int retryAttemptInter;
+
+public void InitializeInterstitialAds()
+{
+    // Attach callback
+    MaxSdkCallbacks.Interstitial.OnAdLoadedEvent += OnInterstitialLoadedEvent;
+    MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent += OnInterstitialLoadFailedEvent;
+    MaxSdkCallbacks.Interstitial.OnAdDisplayedEvent += OnInterstitialDisplayedEvent;
+    MaxSdkCallbacks.Interstitial.OnAdClickedEvent += OnInterstitialClickedEvent;
+    MaxSdkCallbacks.Interstitial.OnAdHiddenEvent += OnInterstitialHiddenEvent;
+    MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent += OnInterstitialAdFailedToDisplayEvent;
+    
+    // Load the first interstitial
+    LoadInterstitial();
+}
+
+private void LoadInterstitial()
+{
+    MaxSdk.LoadInterstitial(adUnitIdInter);
+}
+
+private void OnInterstitialLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+{
+    // Interstitial ad is ready for you to show. MaxSdk.IsInterstitialReady(adUnitId) now returns 'true'
+
+    // Reset retry attempt
+    retryAttemptInter = 0;
+}
+
+private void OnInterstitialLoadFailedEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo)
+{
+    // Interstitial ad failed to load 
+    // AppLovin recommends that you retry with exponentially higher delays, up to a maximum delay (in this case 64 seconds)
+
+    retryAttemptInter++;
+    double retryDelay = Math.Pow(2, Math.Min(6, retryAttemptInter));
+    
+    Invoke("LoadInterstitial", (float) retryDelay);
+}
+
+private void OnInterstitialDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) {}
+
+private void OnInterstitialAdFailedToDisplayEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo, MaxSdkBase.AdInfo adInfo)
+{
+    // Interstitial ad failed to display. AppLovin recommends that you load the next ad.
+    LoadInterstitial();
+}
+
+private void OnInterstitialClickedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) {}
+
+private void OnInterstitialHiddenEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+{
+    // Interstitial ad is hidden. Pre-load the next ad.
+    LoadInterstitial();
+}
+
+public void ShowInterstitial()
+{
+    Debug.Log("Applovin - ShowInterstitial_try0");
+    if (MaxSdk.IsInterstitialReady(adUnitIdInter))
+    {
+        Debug.Log("Applovin - ShowInterstitial_try1");
+        MaxSdk.ShowInterstitial(adUnitIdInter);
     }
 }
 

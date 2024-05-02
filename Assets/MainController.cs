@@ -18,6 +18,9 @@ public class MainController : MonoBehaviour
     Analytics analytics;
     ADManager adManager;
     bool isTesterModeOn = false;
+    float lastInterstitialAdTime;
+    float periodInterstitialAdTime = 180.0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,12 +30,25 @@ public class MainController : MonoBehaviour
         analytics = Analytics.GetComponent<Analytics>();
         adManager = ADManager.GetComponent<ADManager>();
         analytics.EmitAnalyticsEvent("launch", "", "", "");
+        lastInterstitialAdTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void tryShowInterstitial()
+    {
+        float nowTime = Time.time;
+        Debug.Log("tryShowInterstitial " + nowTime);
+        if (nowTime > lastInterstitialAdTime+periodInterstitialAdTime)
+        {
+            lastInterstitialAdTime = nowTime;
+            adManager.ShowInterstitial();
+            //ShowIntersritial
+        }
     }
     public void onRewardedClicked()
     {
@@ -70,6 +86,12 @@ public class MainController : MonoBehaviour
         //analytics.EmitAnalyticsEvent("back_button_clicked", gameMode, "", "");
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(gameMode);
+    }
+
+    public void onRaceRestart()
+    {
+        SceneManager.UnloadSceneAsync("GameRace");
+        SceneManager.LoadScene("GameRace", LoadSceneMode.Additive);
     }
 
     public void EmitAnalyticsEvent(string event_name, string ed1, string ed2, string ed3)

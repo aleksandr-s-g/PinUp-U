@@ -114,6 +114,7 @@ public class GameControllerRace : MonoBehaviour
                         isTimerExpired2 = true;
                         looseTimer = 0f;
                         hudrace.SetButtonInteractable(false);
+                        mainController.tryShowInterstitial();
                     }
                 }
             }

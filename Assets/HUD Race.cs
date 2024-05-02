@@ -98,7 +98,8 @@ public class HUDRace : MonoBehaviour
     public void onRestartClickedRace()
     {
         mainController.EmitAnalyticsEvent("restart_clicked", "", "", "");
-        SceneManager.LoadScene("GameRace", LoadSceneMode.Single);
+        mainController.onRaceRestart();
+        //SceneManager.LoadScene("GameRace", LoadSceneMode.Single);
     }
     public void onReslifeClickedRace()
     {

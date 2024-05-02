@@ -55,6 +55,9 @@ public class GameControllerJourney : MonoBehaviour
         {
             currentScore = (int)Ball.transform.position.y;
             saveManager.setScores(currentScore + loadedScore);
+            if (currentScore%100 == 0){
+                mainController.tryShowInterstitial();
+            }
         }
         hudjourney.SetScores(currentScore + loadedScore);
         hudjourney.SetCoins(currentCoins);

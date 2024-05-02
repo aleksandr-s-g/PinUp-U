@@ -113,6 +113,8 @@ public class MainTesterUI : MonoBehaviour
         isTesterModeOn = mainController.GetTesterModeIsOn();
         
         TestModePanel.SetActive(isTesterModeOn);
+
+        
     }
 
     // Update is called once per frame

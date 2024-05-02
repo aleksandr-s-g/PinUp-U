@@ -175,7 +175,7 @@ public class MainMenu : MonoBehaviour
         mainController = GameObject.FindGameObjectWithTag("MainTag").GetComponent<MainController>();
         isTesterModeOn = mainController.GetTesterModeIsOn();
         gameMode = saveManager.getGameMode();
-        TestModePanel.SetActive(isTesterModeOn);
+        //TestModePanel.SetActive(isTesterModeOn);
         if (gameMode != "journey" && gameMode != "race")
         {
             gameMode = "journey";
@@ -197,7 +197,7 @@ public class MainMenu : MonoBehaviour
     {
         //mainController.GetBaseDeviceInfo();
         //testHeadText.text = "TEST MODE\r\nFPS: " + mainController.GetBaseDeviceInfo().fps.ToString();
-        if (isTesterModeOn)
+        /*if (isTesterModeOn)
         {
             fpsTimer = fpsTimer + Time.deltaTime;
             if (fpsTimer > fpsSecondPerUpdate)
@@ -206,10 +206,10 @@ public class MainMenu : MonoBehaviour
                 testHeadText.text = "TEST MODE\r\nFPS: " + mainController.GetBaseDeviceInfo().fps.ToString();
                /* testBodyText.text = "UUID: " + mainController.GetBaseUserInfo().uuid.ToString() +
                     "\r\nIP: " + mainController.GetBaseDeviceInfo().global_ip.ToString() +
-                    "\r\nDeviceInfo:" + mainController.GetBaseDeviceInfo().ToString();  */
+                    "\r\nDeviceInfo:" + mainController.GetBaseDeviceInfo().ToString();  
             }
             
-        }
+        }*/
         
         
 
